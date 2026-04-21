@@ -5,19 +5,15 @@ import { Icon } from 'astro-icon/components';
 
 <Layout>
   <!-- ── HERO ─────────────────────────────────────────────── -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+  <section class="relative overflow-hidden px-6">
     <!-- Background blobs -->
     <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-corix-accent/[0.06] rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-ctp-blue/[0.05] rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center py-24">
+    <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center py-12 md:py-24">
       <!-- Text -->
       <div class="reveal">
-        <div class="inline-flex items-center gap-2 text-xs border border-corix-accent/30 bg-corix-accent/[0.06] text-corix-accent px-3 py-1.5 rounded-full mb-6">
-          <span class="w-1.5 h-1.5 rounded-full bg-corix-accent animate-pulse-slow"></span>
-          AI-native terminal
-        </div>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-ctp-text mb-6 leading-tight tracking-tight">
+<h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-ctp-text mb-6 leading-tight tracking-tight">
           The terminal<br/>
           <span class="gradient-text">that thinks</span>
         </h1>
@@ -52,7 +48,7 @@ import { Icon } from 'astro-icon/components';
       </div>
 
       <!-- Terminal preview -->
-      <div class="reveal reveal-delay-2">
+      <div class="hidden md:block reveal reveal-delay-2">
         <div class="terminal-window shadow-2xl shadow-black/50">
           <!-- Chrome -->
           <div class="terminal-chrome">
@@ -257,7 +253,7 @@ import { Icon } from 'astro-icon/components';
       </div>
 
       <!-- Pricing cards -->
-      <div class="grid md:grid-cols-3 gap-6 pt-6 mb-16">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-6 mb-16">
         <!-- Starter -->
         <div class="card reveal reveal-delay-1 flex flex-col">
           <div class="mb-4">
@@ -499,10 +495,6 @@ import { Icon } from 'astro-icon/components';
         <a href="#install" class="btn-primary">
           <Icon name="lucide:zap" class="w-4 h-4" />
           Start for free
-        </a>
-        <a href="https://github.com/oceanstack/gterm" class="btn-secondary">
-          <Icon name="lucide:github" class="w-4 h-4" />
-          View on GitHub
         </a>
       </div>
       <p class="text-xs text-ctp-overlay0 mt-6">Free tier available · No credit card to try</p>
