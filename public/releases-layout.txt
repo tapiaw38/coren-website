@@ -1,0 +1,26 @@
+Release layout for https://corix.dev/releases
+
+latest/
+  SHA256SUMS
+  corix_linux_amd64.tar.gz
+  corix_linux_arm64.tar.gz
+  corix_darwin_amd64.tar.gz
+  corix_darwin_arm64.tar.gz
+
+v0.x.y/
+  SHA256SUMS
+  corix_linux_amd64.tar.gz
+  corix_linux_arm64.tar.gz
+  corix_darwin_amd64.tar.gz
+  corix_darwin_arm64.tar.gz
+
+Each archive should contain exactly:
+  corix
+  corix-proxi
+  corixp
+
+Example SHA256SUMS format:
+  <sha256>  corix_linux_amd64.tar.gz
+  <sha256>  corix_linux_arm64.tar.gz
+  <sha256>  corix_darwin_amd64.tar.gz
+  <sha256>  corix_darwin_arm64.tar.gz

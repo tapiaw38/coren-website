@@ -1,859 +1,430 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
+
+const sidebar = [
+  {
+    title: 'Get Started',
+    icon: 'lucide:rocket',
+    links: [
+      ['what-is-corix', 'What is corix?'],
+      ['components', 'Components'],
+      ['requirements', 'Requirements'],
+    ],
+  },
+  {
+    title: 'Installation',
+    icon: 'lucide:download',
+    links: [
+      ['install-corix', 'Install binaries'],
+      ['bootstrap-proxy', 'Bootstrap proxy'],
+      ['auth-license', 'Activate beta license'],
+      ['run-stack', 'Run the stack'],
+    ],
+  },
+  {
+    title: 'Configuration',
+    icon: 'lucide:settings',
+    links: [
+      ['corix-config', 'corix config'],
+      ['providers', 'Providers'],
+    ],
+  },
+  {
+    title: 'Runtime',
+    icon: 'lucide:brain',
+    links: [
+      ['modes', 'AI modes'],
+      ['shortcuts', 'Keyboard'],
+      ['service', 'User service'],
+    ],
+  },
+  {
+    title: 'Troubleshooting',
+    icon: 'lucide:wrench',
+    links: [
+      ['port-mismatch', 'Port mismatch'],
+      ['mongo', 'MongoDB'],
+      ['workspace', 'Workspace export'],
+    ],
+  },
+];
+
+const corixConfig = [
+  ['copy-on-select', 'true', 'Auto-copy selected text.'],
+  ['middle-click-paste', 'true', 'Paste with middle click into the terminal session.'],
+  ['ai-panel-height', '18', 'Panel height when docked top or bottom.'],
+  ['ai-panel-width', '80', 'Panel width when docked left or right.'],
+  ['ai-panel-open', 'false', 'Open the AI panel at startup.'],
+  ['ai-suggest', 'true', 'Enable inline AI suggestions while typing.'],
+  ['inline-assist', 'true', 'Enable inline hints after command execution.'],
+  ['proxy-url', 'empty', 'Base URL for the proxy, for example `http://127.0.0.1:4000`.'],
+  ['workspace', 'empty', 'Workspace path sent to the proxy as context.'],
+];
+
+const providers = [
+  ['ollama', 'http://127.0.0.1:11434/v1', 'gemma4:latest'],
+  ['deepseek', 'https://api.deepseek.com', 'deepseek-chat'],
+  ['openai', 'https://api.openai.com/v1', 'gpt-4o'],
+  ['anthropic', 'https://api.anthropic.com/v1', 'claude-sonnet-4-6'],
+  ['gemini', 'https://generativelanguage.googleapis.com/v1beta/openai/', 'gemini-2.0-flash'],
+  ['groq', 'https://api.groq.com/openai/v1', 'llama-3.3-70b-versatile'],
+];
 ---
 
 <Layout
   title="Documentation — corix"
-  description="corix documentation: installation, configuration, AI modes, keyboard shortcuts, and FAQ."
+  description="Installation and runtime notes for corix, corix-proxi, and corixp."
 >
   <div class="min-h-screen flex">
-    <!-- ── SIDEBAR ────────────────────────────────────────────── -->
-    <aside id="sidebar" class="hidden lg:flex flex-col w-64 xl:w-72 shrink-0 border-r border-white/[0.06] sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto py-8 px-5 bg-ctp-base">
-      <p class="text-xs font-bold uppercase tracking-widest text-ctp-overlay0 mb-4 px-2">Documentation</p>
-      <nav class="flex flex-col gap-0.5" id="sidebar-nav">
-        <!-- Get Started -->
-        <div class="mb-2">
-          <button class="sidebar-group w-full flex items-center gap-2 px-2 py-1.5 text-sm font-semibold text-ctp-subtext1 hover:text-ctp-text transition-colors rounded" data-section="get-started">
-            <Icon name="lucide:rocket" class="w-3.5 h-3.5 opacity-60" />
-            Get Started
-          </button>
-          <div class="sidebar-children pl-5 flex flex-col gap-0.5 mt-0.5">
-            <a href="#what-is-corix" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">What is corix?</a>
-            <a href="#requirements" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Requirements</a>
-          </div>
-        </div>
+    <aside class="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 overflow-y-auto border-r border-white/[0.06] bg-ctp-base px-5 py-8 lg:flex xl:w-72">
+      <div class="w-full">
+        <p class="mb-4 px-2 text-xs font-bold uppercase tracking-widest text-ctp-overlay0">Documentation</p>
+        <nav class="flex flex-col gap-3">
+          {sidebar.map((group) => (
+            <div>
+              <p class="mb-1 flex items-center gap-2 px-2 text-sm font-semibold text-ctp-subtext1">
+                <Icon name={group.icon} class="h-3.5 w-3.5 opacity-60" />
+                {group.title}
+              </p>
+              <div class="flex flex-col gap-0.5 pl-5">
+                {group.links.map(([href, label]) => (
+                  <a href={`#${href}`} class="rounded px-2 py-1 text-sm text-ctp-overlay0 transition-colors hover:text-ctp-text">{label}</a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </nav>
 
-        <!-- Installation -->
-        <div class="mb-2">
-          <button class="sidebar-group w-full flex items-center gap-2 px-2 py-1.5 text-sm font-semibold text-ctp-subtext1 hover:text-ctp-text transition-colors rounded" data-section="installation">
-            <Icon name="lucide:download" class="w-3.5 h-3.5 opacity-60" />
-            Installation
-          </button>
-          <div class="sidebar-children pl-5 flex flex-col gap-0.5 mt-0.5">
-            <a href="#install-corix" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Install corix</a>
-            <a href="#install-proxy" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Setup corix-proxy</a>
-            <a href="#providers" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">AI Providers</a>
-          </div>
-        </div>
-
-        <!-- Configuration -->
-        <div class="mb-2">
-          <button class="sidebar-group w-full flex items-center gap-2 px-2 py-1.5 text-sm font-semibold text-ctp-subtext1 hover:text-ctp-text transition-colors rounded" data-section="configuration">
-            <Icon name="lucide:settings" class="w-3.5 h-3.5 opacity-60" />
-            Configuration
-          </button>
-          <div class="sidebar-children pl-5 flex flex-col gap-0.5 mt-0.5">
-            <a href="#config-file" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Config file</a>
-            <a href="#config-options" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">All options</a>
-          </div>
-        </div>
-
-        <!-- AI Modes -->
-        <div class="mb-2">
-          <button class="sidebar-group w-full flex items-center gap-2 px-2 py-1.5 text-sm font-semibold text-ctp-subtext1 hover:text-ctp-text transition-colors rounded" data-section="ai-modes">
-            <Icon name="lucide:brain" class="w-3.5 h-3.5 opacity-60" />
-            AI Modes
-          </button>
-          <div class="sidebar-children pl-5 flex flex-col gap-0.5 mt-0.5">
-            <a href="#mode-default" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Default</a>
-            <a href="#mode-watch" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Watch</a>
-            <a href="#mode-execute" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Execute</a>
-            <a href="#mode-debug" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Debug</a>
-          </div>
-        </div>
-
-        <!-- Keyboard Shortcuts -->
-        <div class="mb-2">
-          <button class="sidebar-group w-full flex items-center gap-2 px-2 py-1.5 text-sm font-semibold text-ctp-subtext1 hover:text-ctp-text transition-colors rounded" data-section="keyboard-shortcuts">
-            <Icon name="lucide:keyboard" class="w-3.5 h-3.5 opacity-60" />
-            Keyboard Shortcuts
-          </button>
-          <div class="sidebar-children pl-5 flex flex-col gap-0.5 mt-0.5">
-            <a href="#shortcuts-global" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Global</a>
-            <a href="#shortcuts-ai" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">AI Panel</a>
-            <a href="#shortcuts-terminal" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Terminal</a>
-            <a href="#shortcuts-panes" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Panes</a>
-            <a href="#shortcuts-commands" class="sidebar-link text-sm text-ctp-overlay0 hover:text-ctp-text px-2 py-1 rounded transition-colors">Slash Commands</a>
-          </div>
-        </div>
-
-        <!-- FAQ -->
-        <div class="mb-2">
-          <button class="sidebar-group w-full flex items-center gap-2 px-2 py-1.5 text-sm font-semibold text-ctp-subtext1 hover:text-ctp-text transition-colors rounded" data-section="faq">
-            <Icon name="lucide:help-circle" class="w-3.5 h-3.5 opacity-60" />
-            FAQ
-          </button>
-        </div>
-      </nav>
-
-      <!-- Version badge -->
-      <div class="mt-auto pt-8">
-        <div class="px-2 py-2 rounded-lg bg-ctp-surface0/50 text-xs text-ctp-overlay0 flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-ctp-green animate-pulse-slow"></span>
-          corix v0.1 — early access
+        <div class="mt-8 rounded-lg bg-ctp-surface0/50 px-3 py-3 text-xs text-ctp-overlay0">
+          The docs below describe the binary distribution flow exposed through `https://corix.dev/install.sh`.
         </div>
       </div>
     </aside>
 
-    <!-- ── MAIN CONTENT ────────────────────────────────────────── -->
-    <div class="flex-1 min-w-0">
-      <div class="max-w-3xl mx-auto px-6 lg:px-10 py-12 pb-32">
-
-        <!-- ── GET STARTED ──────────────────────────────────────── -->
-        <section id="get-started" class="doc-section mb-20">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="w-8 h-8 rounded-lg bg-corix-accent/10 flex items-center justify-center shrink-0">
-              <Icon name="lucide:rocket" class="w-4 h-4 text-corix-accent" />
+    <div class="min-w-0 flex-1">
+      <div class="mx-auto max-w-4xl px-6 py-12 pb-32 lg:px-10">
+        <section class="mb-20">
+          <div class="mb-8 flex items-center gap-3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
+              <Icon name="lucide:book-open" class="h-4 w-4 text-corix-accent" />
             </div>
-            <h1 class="text-3xl font-bold text-ctp-text">Get Started</h1>
+            <h1 class="text-3xl font-bold text-ctp-text">corix documentation</h1>
+          </div>
+          <p class="text-lg leading-relaxed text-ctp-subtext1">
+            `corix` is the terminal app. `corix-proxi` is the local HTTP proxy. `corixp` is the operator CLI for the proxy, database, providers, shell integration, memory inspection, and the user service.
+          </p>
+        </section>
+
+        <hr class="mb-20 border-white/[0.06]" />
+
+        <section class="doc-section mb-20">
+          <div class="mb-8 flex items-center gap-3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
+              <Icon name="lucide:rocket" class="h-4 w-4 text-corix-accent" />
+            </div>
+            <h2 class="text-3xl font-bold text-ctp-text">Get Started</h2>
           </div>
 
-          <p class="text-ctp-subtext1 text-lg leading-relaxed mb-10">
-            corix is an AI-native terminal emulator built with Go. It embeds a live AI panel directly into your terminal session — no browser, no extra windows, just your shell with intelligence baked in.
+          <h3 id="what-is-corix" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">What is corix?</h3>
+          <p class="mb-6 leading-relaxed text-ctp-subtext1">
+            It is a Go terminal interface that runs a real shell session, renders it inside the app, and can attach an AI panel that talks to the local proxy API.
           </p>
 
-          <h2 id="what-is-corix" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">What is corix?</h2>
-          <p class="text-ctp-subtext1 leading-relaxed mb-6">
-            corix wraps your shell in a full vt10x-compatible terminal emulator rendered in the TUI. An AI panel can appear at any edge (top, bottom, left, or right) and runs in four distinct modes: <strong class="text-ctp-text">Default</strong> for free-form Q&amp;A, <strong class="text-ctp-text">Watch</strong> for passive monitoring, <strong class="text-ctp-text">Execute</strong> for AI-driven command suggestions, and <strong class="text-ctp-text">Debug</strong> for automatic error analysis.
-          </p>
-
-          <div class="grid sm:grid-cols-3 gap-4 mb-10">
-            <div class="card p-4">
-              <div class="text-corix-accent font-mono font-bold text-2xl mb-1">4</div>
-              <div class="text-ctp-subtext1 text-sm">AI modes</div>
+          <h3 id="components" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Components</h3>
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="card p-5">
+              <h4 class="mb-2 font-semibold text-ctp-text">`corix`</h4>
+              <p class="text-sm leading-relaxed text-ctp-subtext1">Interactive terminal UI. Supports panel position state, AI modes, inline assist, scrollback, mouse support, and conversation attachment via `--conv-id`.</p>
             </div>
-            <div class="card p-4">
-              <div class="text-corix-accent font-mono font-bold text-2xl mb-1">0ms</div>
-              <div class="text-ctp-subtext1 text-sm">startup overhead</div>
+            <div class="card p-5">
+              <h4 class="mb-2 font-semibold text-ctp-text">`corix-proxi`</h4>
+              <p class="text-sm leading-relaxed text-ctp-subtext1">HTTP server for providers, conversations, inline assist, command completion, and shell-session tool interactions. Defaults to `127.0.0.1:4000`.</p>
             </div>
-            <div class="card p-4">
-              <div class="text-corix-accent font-mono font-bold text-2xl mb-1">BYOK</div>
-              <div class="text-ctp-subtext1 text-sm">bring your own key</div>
+            <div class="card p-5">
+              <h4 class="mb-2 font-semibold text-ctp-text">`corixp`</h4>
+              <p class="text-sm leading-relaxed text-ctp-subtext1">CLI for setup and operations: `init`, `provider`, `db`, `shell`, `service`, `memory`, and `inspect`.</p>
             </div>
           </div>
 
-          <h2 id="requirements" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">Requirements</h2>
-          <ul class="space-y-2 text-ctp-subtext1 mb-6">
-            <li class="flex items-start gap-2"><span class="text-corix-accent mt-1">›</span> Linux or macOS (arm64 / amd64)</li>
-            <li class="flex items-start gap-2"><span class="text-corix-accent mt-1">›</span> A terminal that supports 256-color and mouse reporting (kitty, alacritty, wezterm, iTerm2, …)</li>
-            <li class="flex items-start gap-2"><span class="text-corix-accent mt-1">›</span> An API key for at least one AI provider (DeepSeek, OpenAI, or a local Ollama instance)</li>
-            <li class="flex items-start gap-2"><span class="text-corix-accent mt-1">›</span> An active corix subscription (Starter · Pro · Team)</li>
+          <h3 id="requirements" class="mb-4 mt-10 scroll-mt-24 text-xl font-semibold text-ctp-text">Requirements</h3>
+          <ul class="space-y-2 text-ctp-subtext1">
+            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> MongoDB via Docker or Docker Compose for the default local proxy persistence flow.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> `bash` or `zsh` if you want `corixp shell init` to update your rc file.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> At least one provider API key unless you use a custom endpoint without auth.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> Linux is the only supported platform right now.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> macOS support is planned for a later release.</li>
           </ul>
         </section>
 
-        <hr class="border-white/[0.06] mb-20" />
+        <hr class="mb-20 border-white/[0.06]" />
 
-        <!-- ── INSTALLATION ──────────────────────────────────────── -->
-        <section id="installation" class="doc-section mb-20">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="w-8 h-8 rounded-lg bg-corix-accent/10 flex items-center justify-center shrink-0">
-              <Icon name="lucide:download" class="w-4 h-4 text-corix-accent" />
+        <section class="doc-section mb-20">
+          <div class="mb-8 flex items-center gap-3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
+              <Icon name="lucide:download" class="h-4 w-4 text-corix-accent" />
             </div>
-            <h1 class="text-3xl font-bold text-ctp-text">Installation</h1>
+            <h2 class="text-3xl font-bold text-ctp-text">Installation</h2>
           </div>
 
-          <h2 id="install-corix" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">Install corix</h2>
-          <p class="text-ctp-subtext1 leading-relaxed mb-4">
-            The quickest way to install corix is with the one-liner below. The script detects your OS and architecture, downloads the correct binary, and places it in <code class="text-corix-accent">/usr/local/bin</code>.
+          <h3 id="install-corix" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Install binaries</h3>
+          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+            The supported user path is a single binary installer. It downloads one platform bundle, verifies its checksum, installs `corix`, `corix-proxi`, and `corixp`, and creates the `cor` alias.
+          </p>
+          <div class="terminal-window mb-8">
+            <div class="terminal-chrome">
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
+              <span class="ml-auto text-xs text-ctp-overlay0">binary install</span>
+            </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">curl -fsSL https://corix.dev/install.sh | sh</span></code></pre>
+          </div>
+          <p class="mb-8 leading-relaxed text-ctp-subtext1">
+            To pin a specific release, the installer also accepts `VERSION=v0.x.y`, for example `curl -fsSL https://corix.dev/install.sh | VERSION=v0.3.1 sh`.
           </p>
 
-          <div class="terminal-window mb-6">
-            <div class="terminal-chrome">
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">bash</span>
-            </div>
-            <div class="p-4 font-mono text-sm">
-              <span class="text-ctp-green">$</span> <span class="text-ctp-text">curl -fsSL https://corix.dev/install.sh | sh</span>
-            </div>
-          </div>
-
-          <p class="text-ctp-subtext1 leading-relaxed mb-4">After installation, verify the binary is accessible:</p>
-
-          <div class="terminal-window mb-6">
-            <div class="terminal-chrome">
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/80"></span>
-            </div>
-            <div class="p-4 font-mono text-sm space-y-1">
-              <div><span class="text-ctp-green">$</span> <span class="text-ctp-text">corix --version</span></div>
-              <div class="text-ctp-overlay0">corix v0.1.0 (linux/amd64)</div>
-            </div>
-          </div>
-
-          <div class="card p-4 mb-10 flex gap-3">
-            <Icon name="lucide:info" class="w-4 h-4 text-ctp-blue shrink-0 mt-0.5" />
-            <p class="text-ctp-subtext1 text-sm leading-relaxed">
-              To install manually, download the release archive from the GitHub releases page, extract the <code class="text-corix-accent">corix</code> binary, and move it to a directory in your <code class="text-corix-accent">$PATH</code>.
-            </p>
-          </div>
-
-          <h2 id="install-proxy" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">Setup corix-proxy</h2>
-          <p class="text-ctp-subtext1 leading-relaxed mb-4">
-            <strong class="text-ctp-text">corix-proxy</strong> is a lightweight local server that holds your API keys and license, acting as the bridge between corix and your AI provider. It runs as a background daemon and is required for the AI features to work.
+          <h3 id="bootstrap-proxy" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Bootstrap proxy</h3>
+          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+            `corixp init` is the shortest valid bootstrap path. It prepares the local runtime, starts or wires MongoDB, and guides provider setup. You should not need a manual `.env` for the normal binary install path.
           </p>
-
-          <div class="terminal-window mb-6">
+          <div class="terminal-window mb-8">
             <div class="terminal-chrome">
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">bash</span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
+              <span class="ml-auto text-xs text-ctp-overlay0">bootstrap</span>
             </div>
-            <div class="p-4 font-mono text-sm space-y-1">
-              <div class="text-ctp-overlay0"># Install corix-proxy</div>
-              <div><span class="text-ctp-green">$</span> <span class="text-ctp-text">curl -fsSL https://corix.dev/install-proxy.sh | sh</span></div>
-              <div class="mt-2 text-ctp-overlay0"># Initialize with your license key</div>
-              <div><span class="text-ctp-green">$</span> <span class="text-ctp-text">corix-proxy init --license YOUR_LICENSE_KEY</span></div>
-              <div class="text-ctp-green">✓ License validated — proxy running on :7432</div>
-            </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corixp init</span></code></pre>
           </div>
 
-          <p class="text-ctp-subtext1 leading-relaxed mb-4">
-            The proxy registers itself as a systemd/launchd service automatically. You can also start it manually:
+          <h3 id="auth-license" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Activate beta license</h3>
+          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+            The proxy validates beta access through your auth session. After setup, log in once so `corix-proxi` can activate your local beta license.
           </p>
-
-          <div class="terminal-window mb-10">
+          <div class="terminal-window mb-8">
             <div class="terminal-chrome">
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
+              <span class="ml-auto text-xs text-ctp-overlay0">auth</span>
             </div>
-            <div class="p-4 font-mono text-sm space-y-1">
-              <div><span class="text-ctp-green">$</span> <span class="text-ctp-text">corix-proxy start</span></div>
-              <div class="text-ctp-overlay0">Proxy listening on 127.0.0.1:7432</div>
-              <div class="mt-2"><span class="text-ctp-green">$</span> <span class="text-ctp-text">corix-proxy status</span></div>
-              <div class="text-ctp-green">● running  pid 84312  port 7432  provider deepseek</div>
-            </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corixp auth login</span></code></pre>
           </div>
 
-          <h2 id="providers" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">AI Providers</h2>
-          <p class="text-ctp-subtext1 leading-relaxed mb-6">
-            corix supports multiple AI backends. Configure your preferred provider by adding your API key to the proxy:
+          <h3 id="run-stack" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Run the stack</h3>
+          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+            The website onboarding should stay simple: start the proxy, then open the TUI with `corix`.
           </p>
-
-          <div class="space-y-4 mb-8">
-            <!-- DeepSeek -->
-            <div class="card p-5">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-6 h-6 rounded bg-ctp-blue/20 flex items-center justify-center">
-                  <span class="text-ctp-blue text-xs font-bold">DS</span>
-                </div>
-                <h3 class="font-semibold text-ctp-text">DeepSeek <span class="text-xs text-ctp-green ml-2 bg-ctp-green/10 px-1.5 py-0.5 rounded">recommended</span></h3>
-              </div>
-              <div class="terminal-window">
-                <div class="p-3 font-mono text-sm space-y-1">
-                  <div><span class="text-ctp-green">$</span> <span class="text-ctp-text">corix-proxy set-provider deepseek --key sk-...</span></div>
-                </div>
-              </div>
-              <p class="text-ctp-overlay0 text-xs mt-2">Best cost-to-quality ratio. Uses <code>deepseek-chat</code> by default.</p>
+          <div class="terminal-window">
+            <div class="terminal-chrome">
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
+              <span class="ml-auto text-xs text-ctp-overlay0">run</span>
             </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corix-proxi</span>
 
-            <!-- OpenAI -->
-            <div class="card p-5">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-6 h-6 rounded bg-ctp-green/20 flex items-center justify-center">
-                  <span class="text-ctp-green text-xs font-bold">OA</span>
-                </div>
-                <h3 class="font-semibold text-ctp-text">OpenAI</h3>
-              </div>
-              <div class="terminal-window">
-                <div class="p-3 font-mono text-sm space-y-1">
-                  <div><span class="text-ctp-green">$</span> <span class="text-ctp-text">corix-proxy set-provider openai --key sk-...</span></div>
-                </div>
-              </div>
-              <p class="text-ctp-overlay0 text-xs mt-2">Uses <code>gpt-4o-mini</code> by default. Pass <code>--model gpt-4o</code> for full GPT-4o.</p>
-            </div>
-
-            <!-- Ollama -->
-            <div class="card p-5">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-6 h-6 rounded bg-ctp-peach/20 flex items-center justify-center">
-                  <span class="text-ctp-peach text-xs font-bold">OL</span>
-                </div>
-                <h3 class="font-semibold text-ctp-text">Ollama <span class="text-xs text-ctp-subtext1 ml-2">local</span></h3>
-              </div>
-              <div class="terminal-window">
-                <div class="p-3 font-mono text-sm space-y-1">
-                  <div><span class="text-ctp-green">$</span> <span class="text-ctp-text">corix-proxy set-provider ollama --url http://localhost:11434 --model llama3</span></div>
-                </div>
-              </div>
-              <p class="text-ctp-overlay0 text-xs mt-2">No API key required. Requires a running Ollama instance.</p>
-            </div>
+<span class="text-ctp-green">corix</span></code></pre>
           </div>
         </section>
 
-        <hr class="border-white/[0.06] mb-20" />
+        <hr class="mb-20 border-white/[0.06]" />
 
-        <!-- ── CONFIGURATION ─────────────────────────────────────── -->
-        <section id="configuration" class="doc-section mb-20">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="w-8 h-8 rounded-lg bg-corix-accent/10 flex items-center justify-center shrink-0">
-              <Icon name="lucide:settings" class="w-4 h-4 text-corix-accent" />
+        <section class="doc-section mb-20">
+          <div class="mb-8 flex items-center gap-3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
+              <Icon name="lucide:settings" class="h-4 w-4 text-corix-accent" />
             </div>
-            <h1 class="text-3xl font-bold text-ctp-text">Configuration</h1>
+            <h2 class="text-3xl font-bold text-ctp-text">Configuration</h2>
           </div>
 
-          <h2 id="config-file" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">Config file</h2>
-          <p class="text-ctp-subtext1 leading-relaxed mb-4">
-            corix reads its configuration from <code class="text-corix-accent">~/.config/corix/config.yaml</code>. The file is created automatically on first run with sensible defaults.
+          <h3 id="corix-config" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">corix config</h3>
+          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+            `corix` reads `~/.config/corix/config` as a simple key-value file. Runtime state such as panel position and current AI mode is stored separately in `~/.config/corix/state`.
           </p>
-
-          <div class="terminal-window mb-10">
-            <div class="terminal-chrome">
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">~/.config/corix/config.yaml</span>
-            </div>
-            <div class="p-4 font-mono text-sm space-y-1 leading-relaxed">
-              <div class="text-ctp-overlay0"># corix configuration</div>
-              <div><span class="text-ctp-blue">shell</span><span class="text-ctp-text">: </span><span class="text-ctp-green">""</span><span class="text-ctp-overlay0">             # default: $SHELL</span></div>
-              <div><span class="text-ctp-blue">ai_panel_pos</span><span class="text-ctp-text">: </span><span class="text-ctp-green">"bottom"</span><span class="text-ctp-overlay0">      # bottom | top | left | right</span></div>
-              <div><span class="text-ctp-blue">ai_panel_open</span><span class="text-ctp-text">: </span><span class="text-ctp-peach">false</span><span class="text-ctp-overlay0">         # open AI panel on startup</span></div>
-              <div><span class="text-ctp-blue">ai_mode</span><span class="text-ctp-text">: </span><span class="text-ctp-green">"default"</span><span class="text-ctp-overlay0">      # default | watch | execute | debug</span></div>
-              <div><span class="text-ctp-blue">proxy_url</span><span class="text-ctp-text">: </span><span class="text-ctp-green">"http://127.0.0.1:7432"</span></div>
-              <div><span class="text-ctp-blue">assistant</span><span class="text-ctp-text">: </span><span class="text-ctp-green">""</span><span class="text-ctp-overlay0">            # optional: load a named assistant</span></div>
-              <div><span class="text-ctp-blue">conv_id</span><span class="text-ctp-text">: </span><span class="text-ctp-green">""</span><span class="text-ctp-overlay0">              # optional: resume a conversation</span></div>
-            </div>
-          </div>
-
-          <h2 id="config-options" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">All options</h2>
-
           <div class="overflow-x-auto mb-10">
             <table class="w-full text-sm">
               <thead>
                 <tr class="border-b border-white/[0.08]">
-                  <th class="text-left py-3 px-4 text-ctp-subtext1 font-semibold">Key</th>
-                  <th class="text-left py-3 px-4 text-ctp-subtext1 font-semibold">Default</th>
-                  <th class="text-left py-3 px-4 text-ctp-subtext1 font-semibold">Description</th>
+                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Key</th>
+                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Default</th>
+                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Meaning</th>
                 </tr>
               </thead>
               <tbody class="text-ctp-subtext1">
-                <tr class="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3 px-4"><code class="text-corix-accent">shell</code></td>
-                  <td class="py-3 px-4 text-ctp-overlay0">$SHELL</td>
-                  <td class="py-3 px-4">Shell binary to launch (e.g. <code>/bin/zsh</code>)</td>
+                {corixConfig.map(([key, value, desc]) => (
+                  <tr class="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.02]">
+                    <td class="px-4 py-3"><code class="text-corix-accent">{key}</code></td>
+                    <td class="px-4 py-3 text-ctp-overlay0">{value}</td>
+                    <td class="px-4 py-3">{desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="terminal-window mb-10">
+            <div class="terminal-chrome">
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
+              <span class="ml-auto text-xs text-ctp-overlay0">~/.config/corix/config</span>
+            </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code>proxy-url = http://127.0.0.1:4000
+workspace = /home/you/Workspace/oceanstack/corix-website
+ai-panel-open = true
+ai-panel-width = 90</code></pre>
+          </div>
+
+          <h3 id="providers" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Providers</h3>
+          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+            `corixp provider add` offers built-in presets and a custom option. The active provider is resolved from MongoDB, not from a flat file.
+          </p>
+          <div class="card mb-6 p-5">
+            <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-yellow">API cost warning</p>
+            <p class="mb-3 text-sm leading-relaxed text-ctp-subtext1">
+              `ollama` is the safest recommendation when you want `ai-suggest`, inline assist, watch, execute, or debug enabled all the time. Those paths can generate repeated requests, so a paid hosted API can consume credits much faster than expected.
+            </p>
+            <p class="text-sm leading-relaxed text-ctp-subtext1">
+              Today only one provider can be active at a time. If you want those high-frequency features on, use a single lightweight local setup, for example `ollama` with `gemma4:latest`.
+            </p>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-white/[0.08]">
+                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Name</th>
+                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Base URL</th>
+                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Default model</th>
                 </tr>
-                <tr class="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3 px-4"><code class="text-corix-accent">ai_panel_pos</code></td>
-                  <td class="py-3 px-4 text-ctp-overlay0">bottom</td>
-                  <td class="py-3 px-4">Default position of the AI panel when opened</td>
-                </tr>
-                <tr class="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3 px-4"><code class="text-corix-accent">ai_panel_open</code></td>
-                  <td class="py-3 px-4 text-ctp-overlay0">false</td>
-                  <td class="py-3 px-4">Open the AI panel automatically on startup</td>
-                </tr>
-                <tr class="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3 px-4"><code class="text-corix-accent">ai_mode</code></td>
-                  <td class="py-3 px-4 text-ctp-overlay0">default</td>
-                  <td class="py-3 px-4">Starting AI mode: default · watch · execute · debug</td>
-                </tr>
-                <tr class="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3 px-4"><code class="text-corix-accent">proxy_url</code></td>
-                  <td class="py-3 px-4 text-ctp-overlay0">localhost:7432</td>
-                  <td class="py-3 px-4">URL of your corix-proxy instance</td>
-                </tr>
-                <tr class="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3 px-4"><code class="text-corix-accent">assistant</code></td>
-                  <td class="py-3 px-4 text-ctp-overlay0">—</td>
-                  <td class="py-3 px-4">Load a saved assistant persona by name</td>
-                </tr>
-                <tr class="hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3 px-4"><code class="text-corix-accent">conv_id</code></td>
-                  <td class="py-3 px-4 text-ctp-overlay0">—</td>
-                  <td class="py-3 px-4">Resume a previous conversation by ID</td>
-                </tr>
+              </thead>
+              <tbody class="text-ctp-subtext1">
+                {providers.map(([name, url, model]) => (
+                  <tr class="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.02]">
+                    <td class="px-4 py-3"><code class="text-corix-accent">{name}</code></td>
+                    <td class="px-4 py-3 text-ctp-overlay0">{url}</td>
+                    <td class="px-4 py-3">{model}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </section>
 
-        <hr class="border-white/[0.06] mb-20" />
+        <hr class="mb-20 border-white/[0.06]" />
 
-        <!-- ── AI MODES ──────────────────────────────────────────── -->
-        <section id="ai-modes" class="doc-section mb-20">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="w-8 h-8 rounded-lg bg-corix-accent/10 flex items-center justify-center shrink-0">
-              <Icon name="lucide:brain" class="w-4 h-4 text-corix-accent" />
+        <section class="doc-section mb-20">
+          <div class="mb-8 flex items-center gap-3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
+              <Icon name="lucide:brain" class="h-4 w-4 text-corix-accent" />
             </div>
-            <h1 class="text-3xl font-bold text-ctp-text">AI Modes</h1>
+            <h2 class="text-3xl font-bold text-ctp-text">Runtime</h2>
           </div>
 
-          <p class="text-ctp-subtext1 leading-relaxed mb-8">
-            corix ships with four AI modes, each designed for a different workflow. Switch modes at any time with the <code class="text-corix-accent">/mode</code> command inside the AI panel.
-          </p>
-
-          <!-- Default -->
-          <div id="mode-default" class="scroll-mt-24 mb-10">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-xl">?</span>
-              <h2 class="text-xl font-semibold text-ctp-text">Default mode</h2>
-              <span class="text-xs bg-ctp-surface0 text-ctp-subtext1 px-2 py-0.5 rounded font-mono">/mode default</span>
+          <h3 id="modes" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">AI modes</h3>
+          <div class="grid gap-4 md:grid-cols-2 mb-10">
+            <div class="card p-5">
+              <h4 class="mb-2 font-semibold text-ctp-text">Default</h4>
+              <p class="text-sm leading-relaxed text-ctp-subtext1">General chat mode inside the panel.</p>
             </div>
-            <p class="text-ctp-subtext1 leading-relaxed mb-4">
-              Free-form conversational mode. Ask anything: explain a command, help write a script, look up flag options. The AI responds in the panel without touching your terminal.
-            </p>
-            <div class="terminal-window">
-              <div class="terminal-chrome">
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/80"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/80"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/80"></span>
-                <span class="ml-auto text-xs text-ctp-overlay0">AI panel · default</span>
-              </div>
-              <div class="p-4 font-mono text-sm space-y-2">
-                <div><span class="text-corix-accent">you</span> <span class="text-ctp-overlay0">›</span> <span class="text-ctp-text">what does `lsof -i :5432` do?</span></div>
-                <div class="text-ctp-subtext1 pl-0 leading-relaxed"><span class="text-ctp-green">ai</span> <span class="text-ctp-overlay0">›</span> Lists all processes that have an open network file on port 5432 (typically PostgreSQL). Useful for finding what's occupying a port before starting a service.</div>
-              </div>
+            <div class="card p-5">
+              <h4 class="mb-2 font-semibold text-ctp-text">Watch</h4>
+              <p class="text-sm leading-relaxed text-ctp-subtext1">Submits command output to the AI after output settles.</p>
+            </div>
+            <div class="card p-5">
+              <h4 class="mb-2 font-semibold text-ctp-text">Execute</h4>
+              <p class="text-sm leading-relaxed text-ctp-subtext1">Proposes follow-up commands that you can confirm before execution.</p>
+            </div>
+            <div class="card p-5">
+              <h4 class="mb-2 font-semibold text-ctp-text">Debug</h4>
+              <p class="text-sm leading-relaxed text-ctp-subtext1">Only reacts on outputs that look like a failure path.</p>
             </div>
           </div>
 
-          <!-- Watch -->
-          <div id="mode-watch" class="scroll-mt-24 mb-10">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-xl">◉</span>
-              <h2 class="text-xl font-semibold text-ctp-text">Watch mode</h2>
-              <span class="text-xs bg-ctp-surface0 text-ctp-subtext1 px-2 py-0.5 rounded font-mono">/mode watch</span>
-            </div>
-            <p class="text-ctp-subtext1 leading-relaxed mb-4">
-              corix passively monitors your terminal output. After a command finishes and output settles (800 ms of silence), the AI automatically receives the command + full output and provides a contextual summary or explanation. No input required.
-            </p>
-            <div class="card p-4 mb-4 flex gap-3">
-              <Icon name="lucide:info" class="w-4 h-4 text-ctp-blue shrink-0 mt-0.5" />
-              <p class="text-ctp-subtext1 text-sm">
-                Watch mode sends output after 800 ms of silence. Long-running commands (test suites, builds) are captured when they finish naturally.
-              </p>
-            </div>
-            <div class="terminal-window">
-              <div class="terminal-chrome">
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/80"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/80"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/80"></span>
-                <span class="ml-auto text-xs text-ctp-overlay0">AI panel · watch</span>
-              </div>
-              <div class="p-4 font-mono text-sm space-y-1">
-                <div class="text-ctp-overlay0 text-xs mb-2">[terminal] go test ./...</div>
-                <div class="text-ctp-red pl-2">FAIL: TestUserCreate (timeout 30s)</div>
-                <div class="text-ctp-overlay0 mt-2 text-xs">— AI panel updates automatically —</div>
-                <div class="text-ctp-green mt-2">ai › 1 test timed out. The TestUserCreate test exceeded 30 s — likely a missing mock or a real DB call blocking. Check for unresolved context deadlines.</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Execute -->
-          <div id="mode-execute" class="scroll-mt-24 mb-10">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-xl">⚡</span>
-              <h2 class="text-xl font-semibold text-ctp-text">Execute mode</h2>
-              <span class="text-xs bg-ctp-surface0 text-ctp-subtext1 px-2 py-0.5 rounded font-mono">/mode execute</span>
-            </div>
-            <p class="text-ctp-subtext1 leading-relaxed mb-4">
-              After each command, the AI analyzes the output and suggests follow-up commands. Suggested commands appear as chips in the AI panel. Navigate with <kbd class="key">↑</kbd> <kbd class="key">↓</kbd>, confirm with <kbd class="key">Enter</kbd>, or dismiss with <kbd class="key">Esc</kbd>. Confirmed commands run directly in your terminal.
-            </p>
-            <div class="terminal-window">
-              <div class="terminal-chrome">
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/80"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/80"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/80"></span>
-                <span class="ml-auto text-xs text-ctp-overlay0">AI panel · execute</span>
-              </div>
-              <div class="p-4 font-mono text-sm space-y-2">
-                <div class="text-ctp-overlay0 text-xs">[terminal] docker compose up</div>
-                <div class="text-ctp-red">Error: port 5432 already in use</div>
-                <div class="border-t border-white/[0.06] mt-3 pt-3">
-                  <div class="text-ctp-subtext1 text-xs mb-2">AI suggests:</div>
-                  <div class="flex gap-2 flex-wrap">
-                    <span class="bg-corix-accent/20 text-corix-accent border border-corix-accent/30 px-2 py-1 rounded text-xs">lsof -i :5432 | grep LISTEN</span>
-                    <span class="bg-ctp-surface0 text-ctp-subtext1 border border-white/[0.08] px-2 py-1 rounded text-xs">kill $(lsof -ti :5432)</span>
-                  </div>
-                  <div class="text-ctp-overlay0 text-xs mt-2">↑↓ navigate · Enter run · Esc dismiss</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Debug -->
-          <div id="mode-debug" class="scroll-mt-24 mb-6">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-xl">🔧</span>
-              <h2 class="text-xl font-semibold text-ctp-text">Debug mode</h2>
-              <span class="text-xs bg-ctp-surface0 text-ctp-subtext1 px-2 py-0.5 rounded font-mono">/mode debug</span>
-            </div>
-            <p class="text-ctp-subtext1 leading-relaxed mb-4">
-              Debug mode only activates when the terminal output contains recognizable error patterns (non-zero exit codes, stack traces, <code>Error:</code> / <code>FAIL</code> / <code>panic:</code> prefixes). When triggered, it sends the failing output to the AI and displays a diagnosis with a fix suggestion — all without any manual input.
-            </p>
-            <div class="card p-4 mb-4 flex gap-3">
-              <Icon name="lucide:zap" class="w-4 h-4 text-ctp-peach shrink-0 mt-0.5" />
-              <p class="text-ctp-subtext1 text-sm">
-                Unlike Watch mode, Debug mode is <strong class="text-ctp-text">silent on success</strong>. The AI panel only updates when something goes wrong.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <hr class="border-white/[0.06] mb-20" />
-
-        <!-- ── KEYBOARD SHORTCUTS ─────────────────────────────────── -->
-        <section id="keyboard-shortcuts" class="doc-section mb-20">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="w-8 h-8 rounded-lg bg-corix-accent/10 flex items-center justify-center shrink-0">
-              <Icon name="lucide:keyboard" class="w-4 h-4 text-corix-accent" />
-            </div>
-            <h1 class="text-3xl font-bold text-ctp-text">Keyboard Shortcuts</h1>
-          </div>
-
-          <!-- Global -->
-          <h2 id="shortcuts-global" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">Global</h2>
+          <h3 id="shortcuts" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Keyboard</h3>
           <div class="shortcut-table mb-10">
             <div class="shortcut-row">
               <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">O</kbd>
-              <span class="text-ctp-subtext1">Toggle AI panel open / closed</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">G</kbd>
-              <span class="text-ctp-subtext1">Toggle focus between terminal and AI panel</span>
+              <span class="text-ctp-subtext1">Toggle the AI panel.</span>
             </div>
             <div class="shortcut-row">
               <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">Q</kbd>
-              <span class="text-ctp-subtext1">Quit corix (or close AI panel if open)</span>
-            </div>
-          </div>
-
-          <!-- AI Panel -->
-          <h2 id="shortcuts-ai" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">AI Panel</h2>
-          <p class="text-ctp-subtext1 text-sm mb-4">Active when focus is in the AI panel (<kbd class="key">Ctrl</kbd>+<kbd class="key">G</kbd> to switch focus).</p>
-          <div class="shortcut-table mb-4">
-            <div class="shortcut-row">
-              <kbd class="key">Enter</kbd>
-              <span class="text-ctp-subtext1">Send message to AI</span>
+              <span class="text-ctp-subtext1">Quit or move back to the terminal depending on state.</span>
             </div>
             <div class="shortcut-row">
               <kbd class="key">Esc</kbd>
-              <span class="text-ctp-subtext1">Return focus to terminal</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">C</kbd>
-              <span class="text-ctp-subtext1">Cancel ongoing AI stream</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">↑</kbd> <kbd class="key">↓</kbd> <kbd class="key">PgUp</kbd> <kbd class="key">PgDn</kbd>
-              <span class="text-ctp-subtext1">Scroll AI conversation history</span>
+              <span class="text-ctp-subtext1">Return to terminal focus from the AI panel.</span>
             </div>
             <div class="shortcut-row">
               <kbd class="key">Tab</kbd>
-              <span class="text-ctp-subtext1">File path auto-complete in input</span>
+              <span class="text-ctp-subtext1">Accept inline AI suggestion.</span>
+            </div>
+            <div class="shortcut-row">
+              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">←</kbd>/<kbd class="key">→</kbd>/<kbd class="key">↑</kbd>/<kbd class="key">↓</kbd>
+              <span class="text-ctp-subtext1">Move the AI panel around the terminal.</span>
             </div>
           </div>
 
-          <p class="text-ctp-subtext1 text-sm mb-4">Move the AI panel position:</p>
-          <div class="shortcut-table mb-10">
-            <div class="shortcut-row">
-              <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">↑</kbd>
-              <span class="text-ctp-subtext1">Move panel to top</span>
+          <h3 id="service" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">User service</h3>
+          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+            `corixp service install` writes a user-level systemd unit in `~/.config/systemd/user/corix-proxi.service` and points it at the `corix-proxi` binary.
+          </p>
+          <div class="terminal-window">
+            <div class="terminal-chrome">
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
+              <span class="ml-auto text-xs text-ctp-overlay0">service</span>
             </div>
-            <div class="shortcut-row">
-              <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">↓</kbd>
-              <span class="text-ctp-subtext1">Move panel to bottom</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">←</kbd>
-              <span class="text-ctp-subtext1">Move panel to left</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">→</kbd>
-              <span class="text-ctp-subtext1">Move panel to right</span>
-            </div>
-          </div>
-
-          <!-- Terminal -->
-          <h2 id="shortcuts-terminal" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">Terminal</h2>
-          <p class="text-ctp-subtext1 text-sm mb-4">Active when focus is in the terminal pane.</p>
-          <div class="shortcut-table mb-10">
-            <div class="shortcut-row">
-              <kbd class="key">Shift</kbd><span class="key-sep">+</span><kbd class="key">↑</kbd> / <kbd class="key">↓</kbd>
-              <span class="text-ctp-subtext1">Scroll terminal scrollback</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Shift</kbd><span class="key-sep">+</span><kbd class="key">PgUp</kbd> / <kbd class="key">PgDn</kbd>
-              <span class="text-ctp-subtext1">Scroll terminal one page</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">Shift</kbd><span class="key-sep">+</span><kbd class="key">F</kbd>
-              <span class="text-ctp-subtext1">Open inline search</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">Shift</kbd><span class="key-sep">+</span><kbd class="key">C</kbd>
-              <span class="text-ctp-subtext1">Copy selected text</span>
-            </div>
-          </div>
-
-          <!-- Panes -->
-          <h2 id="shortcuts-panes" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">Panes</h2>
-          <div class="shortcut-table mb-10">
-            <div class="shortcut-row">
-              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">v</kbd>
-              <span class="text-ctp-subtext1">Split pane vertically</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">h</kbd>
-              <span class="text-ctp-subtext1">Split pane horizontally</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">x</kbd>
-              <span class="text-ctp-subtext1">Close active pane</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">←</kbd> / <kbd class="key">→</kbd>
-              <span class="text-ctp-subtext1">Cycle pane focus (terminal mode)</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">L</kbd> / <kbd class="key">H</kbd>
-              <span class="text-ctp-subtext1">Resize active pane wider / narrower</span>
-            </div>
-            <div class="shortcut-row">
-              <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">J</kbd> / <kbd class="key">K</kbd>
-              <span class="text-ctp-subtext1">Resize active pane taller / shorter</span>
-            </div>
-          </div>
-
-          <!-- Slash commands -->
-          <h2 id="shortcuts-commands" class="text-xl font-semibold text-ctp-text mb-4 scroll-mt-24">Slash Commands</h2>
-          <p class="text-ctp-subtext1 text-sm mb-4">Type these in the AI panel input field.</p>
-          <div class="shortcut-table">
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/mode default</code>
-              <span class="text-ctp-subtext1">Switch to Default (Q&amp;A) mode</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/mode watch</code>
-              <span class="text-ctp-subtext1">Switch to Watch (passive monitor) mode</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/mode execute</code>
-              <span class="text-ctp-subtext1">Switch to Execute (command suggest) mode</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/mode debug</code>
-              <span class="text-ctp-subtext1">Switch to Debug (error only) mode</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/panel left</code>
-              <span class="text-ctp-subtext1">Move AI panel to left</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/panel right</code>
-              <span class="text-ctp-subtext1">Move AI panel to right</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/panel top</code>
-              <span class="text-ctp-subtext1">Move AI panel to top</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/panel bottom</code>
-              <span class="text-ctp-subtext1">Move AI panel to bottom</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/new</code>
-              <span class="text-ctp-subtext1">Start a new conversation</span>
-            </div>
-            <div class="shortcut-row">
-              <code class="text-corix-accent">/history</code>
-              <span class="text-ctp-subtext1">Browse and resume previous conversations</span>
-            </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">cd ../corix-proxi</span>
+<span class="text-ctp-green">corixp service install</span>
+<span class="text-ctp-green">corixp service start</span>
+<span class="text-ctp-green">corixp service status</span></code></pre>
           </div>
         </section>
 
-        <hr class="border-white/[0.06] mb-20" />
+        <hr class="mb-20 border-white/[0.06]" />
 
-        <!-- ── FAQ ──────────────────────────────────────────────── -->
-        <section id="faq" class="doc-section mb-20">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="w-8 h-8 rounded-lg bg-corix-accent/10 flex items-center justify-center shrink-0">
-              <Icon name="lucide:help-circle" class="w-4 h-4 text-corix-accent" />
+        <section class="doc-section">
+          <div class="mb-8 flex items-center gap-3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
+              <Icon name="lucide:wrench" class="h-4 w-4 text-corix-accent" />
             </div>
-            <h1 class="text-3xl font-bold text-ctp-text">FAQ</h1>
+            <h2 class="text-3xl font-bold text-ctp-text">Troubleshooting</h2>
           </div>
 
-          <div class="space-y-4">
-            <details class="faq-item group">
-              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-4 px-5 rounded-lg bg-ctp-surface0/40 hover:bg-ctp-surface0/70 transition-colors">
-                <span class="text-ctp-text font-medium">Does corix send my terminal output to a remote server?</span>
-                <Icon name="lucide:chevron-down" class="w-4 h-4 text-ctp-overlay0 shrink-0 group-open:rotate-180 transition-transform" />
-              </summary>
-              <div class="px-5 pt-3 pb-5 text-ctp-subtext1 leading-relaxed text-sm">
-                Only when an AI mode is active (Watch, Execute, or Debug) and output is captured. The data flows from corix → corix-proxy (local) → your chosen AI provider. corix itself never communicates with any Oceanstack servers after the initial license check. If you use Ollama, output never leaves your machine.
-              </div>
-            </details>
+          <h3 id="port-mismatch" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Port mismatch</h3>
+          <div class="card mb-8 p-5">
+            <p class="text-sm leading-relaxed text-ctp-subtext1">
+              If the AI panel cannot reach the proxy, verify that `corix-proxi` is running and that your local config points at the expected proxy URL.
+            </p>
+          </div>
 
-            <details class="faq-item group">
-              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-4 px-5 rounded-lg bg-ctp-surface0/40 hover:bg-ctp-surface0/70 transition-colors">
-                <span class="text-ctp-text font-medium">Is my API key stored securely?</span>
-                <Icon name="lucide:chevron-down" class="w-4 h-4 text-ctp-overlay0 shrink-0 group-open:rotate-180 transition-transform" />
-              </summary>
-              <div class="px-5 pt-3 pb-5 text-ctp-subtext1 leading-relaxed text-sm">
-                Yes. Your API key is stored by corix-proxy on your local machine (in <code class="text-corix-accent">~/.config/corix-proxy/</code>) and is never transmitted to Oceanstack. It is only sent directly to your chosen AI provider when making requests.
-              </div>
-            </details>
+          <h3 id="mongo" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">MongoDB</h3>
+          <div class="terminal-window mb-8">
+            <div class="terminal-chrome">
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
+              <span class="ml-auto text-xs text-ctp-overlay0">db</span>
+            </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">cd ../corix-proxi</span>
+<span class="text-ctp-green">corixp db status</span>
+<span class="text-ctp-green">corixp db logs -f</span></code></pre>
+          </div>
 
-            <details class="faq-item group">
-              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-4 px-5 rounded-lg bg-ctp-surface0/40 hover:bg-ctp-surface0/70 transition-colors">
-                <span class="text-ctp-text font-medium">Can I use corix without an internet connection?</span>
-                <Icon name="lucide:chevron-down" class="w-4 h-4 text-ctp-overlay0 shrink-0 group-open:rotate-180 transition-transform" />
-              </summary>
-              <div class="px-5 pt-3 pb-5 text-ctp-subtext1 leading-relaxed text-sm">
-                Partially. corix itself works fully offline as a terminal emulator. AI features require a connection to your provider. If you configure Ollama as your provider and run it locally, all AI features work offline.
-              </div>
-            </details>
-
-            <details class="faq-item group">
-              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-4 px-5 rounded-lg bg-ctp-surface0/40 hover:bg-ctp-surface0/70 transition-colors">
-                <span class="text-ctp-text font-medium">How is corix different from just using ChatGPT in a browser tab?</span>
-                <Icon name="lucide:chevron-down" class="w-4 h-4 text-ctp-overlay0 shrink-0 group-open:rotate-180 transition-transform" />
-              </summary>
-              <div class="px-5 pt-3 pb-5 text-ctp-subtext1 leading-relaxed text-sm">
-                corix is aware of your actual terminal context — current directory, git branch, command output, exit codes. Watch and Debug modes react to your shell automatically without you having to copy-paste anything. You stay in the terminal; the AI comes to you.
-              </div>
-            </details>
-
-            <details class="faq-item group">
-              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-4 px-5 rounded-lg bg-ctp-surface0/40 hover:bg-ctp-surface0/70 transition-colors">
-                <span class="text-ctp-text font-medium">Which AI providers are supported?</span>
-                <Icon name="lucide:chevron-down" class="w-4 h-4 text-ctp-overlay0 shrink-0 group-open:rotate-180 transition-transform" />
-              </summary>
-              <div class="px-5 pt-3 pb-5 text-ctp-subtext1 leading-relaxed text-sm">
-                Currently: <strong class="text-ctp-text">DeepSeek</strong> (recommended), <strong class="text-ctp-text">OpenAI</strong>, and <strong class="text-ctp-text">Ollama</strong> (local). More providers — Anthropic, Mistral, Groq — are planned for upcoming releases.
-              </div>
-            </details>
-
-            <details class="faq-item group">
-              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-4 px-5 rounded-lg bg-ctp-surface0/40 hover:bg-ctp-surface0/70 transition-colors">
-                <span class="text-ctp-text font-medium">Can multiple team members share a Team subscription?</span>
-                <Icon name="lucide:chevron-down" class="w-4 h-4 text-ctp-overlay0 shrink-0 group-open:rotate-180 transition-colors" />
-              </summary>
-              <div class="px-5 pt-3 pb-5 text-ctp-subtext1 leading-relaxed text-sm">
-                Yes. The Team plan is priced per seat ($20/user/month) and each seat receives its own license key. An admin dashboard for managing seats is on the roadmap.
-              </div>
-            </details>
-
-            <details class="faq-item group">
-              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-4 px-5 rounded-lg bg-ctp-surface0/40 hover:bg-ctp-surface0/70 transition-colors">
-                <span class="text-ctp-text font-medium">What terminals / OSes are supported?</span>
-                <Icon name="lucide:chevron-down" class="w-4 h-4 text-ctp-overlay0 shrink-0 group-open:rotate-180 transition-transform" />
-              </summary>
-              <div class="px-5 pt-3 pb-5 text-ctp-subtext1 leading-relaxed text-sm">
-                corix runs on Linux and macOS (arm64 and amd64). It requires a terminal with 256-color and mouse reporting support. Tested with kitty, alacritty, WezTerm, and iTerm2. Windows support (via WSL) is planned.
-              </div>
-            </details>
-
-            <details class="faq-item group">
-              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-4 px-5 rounded-lg bg-ctp-surface0/40 hover:bg-ctp-surface0/70 transition-colors">
-                <span class="text-ctp-text font-medium">How do I report a bug or request a feature?</span>
-                <Icon name="lucide:chevron-down" class="w-4 h-4 text-ctp-overlay0 shrink-0 group-open:rotate-180 transition-transform" />
-              </summary>
-              <div class="px-5 pt-3 pb-5 text-ctp-subtext1 leading-relaxed text-sm">
-                Open an issue on the GitHub repository or join the Discord community. For billing and license issues, email <code class="text-corix-accent">support@corix.dev</code>.
-              </div>
-            </details>
+          <h3 id="workspace" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Workspace export</h3>
+          <div class="card p-5">
+            <p class="mb-3 text-sm leading-relaxed text-ctp-subtext1">
+              `corixp shell init zsh --workspace /path/to/repo` or `corixp shell init bash --workspace /path/to/repo` updates your shell rc and writes `export CORIX_WORKSPACE="..."`.
+            </p>
+            <p class="text-sm leading-relaxed text-ctp-subtext1">
+              If corix opens in the right directory but AI context looks wrong, confirm that variable or set `workspace = /path/to/repo` in `~/.config/corix/config`.
+            </p>
           </div>
         </section>
-
       </div>
     </div>
   </div>
 </Layout>
-
-<style>
-  /* Sidebar active link */
-  .sidebar-link.active {
-    color: theme('colors.corix.accent');
-    background-color: theme('colors.corix.accent / 0.08');
-  }
-
-  /* Shortcut table rows */
-  .shortcut-table {
-    @apply border border-white/[0.06] rounded-xl overflow-hidden;
-  }
-  .shortcut-row {
-    @apply flex items-center gap-4 px-4 py-3 border-b border-white/[0.04] last:border-0 flex-wrap;
-  }
-  .shortcut-row:hover {
-    @apply bg-white/[0.02];
-  }
-
-  /* Key badges */
-  .key {
-    @apply inline-flex items-center justify-center px-1.5 py-0.5 rounded text-xs font-mono font-medium
-           bg-ctp-surface0 text-ctp-subtext1 border border-white/[0.1] shadow-sm min-w-[1.5rem];
-  }
-  .key-sep {
-    @apply text-ctp-overlay0 text-xs;
-  }
-
-  /* FAQ */
-  details summary::-webkit-details-marker { display: none; }
-  details[open] {
-    @apply bg-ctp-surface0/40 rounded-lg border border-white/[0.06];
-  }
-</style>
-
-<script>
-  // ── Active sidebar highlighting via IntersectionObserver ──
-  const sections = document.querySelectorAll<HTMLElement>('.doc-section, [id]');
-  const links = document.querySelectorAll<HTMLAnchorElement>('.sidebar-link');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          links.forEach((link) => {
-            const href = link.getAttribute('href');
-            if (href === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        }
-      });
-    },
-    {
-      rootMargin: '-20% 0% -70% 0%',
-      threshold: 0,
-    }
-  );
-
-  // Observe all heading anchors
-  document.querySelectorAll('section[id], h2[id]').forEach((el) => {
-    observer.observe(el);
-  });
-
-  // Also observe individual anchor targets
-  document.querySelectorAll('[id]').forEach((el) => {
-    observer.observe(el);
-  });
-
-  // ── Smooth scroll for sidebar links ──
-  links.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (href?.startsWith('#')) {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // Update active state immediately on click
-          links.forEach((l) => l.classList.remove('active'));
-          link.classList.add('active');
-        }
-      }
-    });
-  });
-
-  // ── Mobile: sidebar toggle via Navbar ──
-  // (sidebar is hidden on mobile; could wire a hamburger toggle here)
-</script>

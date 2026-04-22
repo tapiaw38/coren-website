@@ -1,95 +1,149 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
+
+const features = [
+  {
+    icon: 'lucide:square-terminal',
+    color: 'text-corix-accent',
+    bg: 'bg-corix-accent/10',
+    title: 'Terminal first',
+    desc: 'A Go terminal interface with scrollback, mouse support, live shell session rendering, and an AI panel inside the same screen.',
+  },
+  {
+    icon: 'lucide:wand-sparkles',
+    color: 'text-ctp-yellow',
+    bg: 'bg-ctp-yellow/10',
+    title: 'Inline assist',
+    desc: 'Shows ghost-text suggestions while you type and can react to command output without moving you into a browser.',
+  },
+  {
+    icon: 'lucide:folder-search',
+    color: 'text-ctp-blue',
+    bg: 'bg-ctp-blue/10',
+    title: 'Workspace aware',
+    desc: 'The shell integration writes `CORIX_WORKSPACE` so the proxy can keep the current repo as operating context.',
+  },
+  {
+    icon: 'lucide:database',
+    color: 'text-ctp-green',
+    bg: 'bg-ctp-green/10',
+    title: 'Local proxy',
+    desc: '`corix-proxi` runs locally, stores providers and conversations in MongoDB, and exposes the API that corix consumes.',
+  },
+];
+
+const modes = [
+  {
+    icon: '?',
+    iconColor: 'text-ctp-blue',
+    bg: 'bg-ctp-blue/10',
+    border: 'border-ctp-blue/20',
+    name: 'Default',
+    tag: 'Ask directly',
+    desc: 'Open the panel and chat with the active provider in the current workspace.',
+  },
+  {
+    icon: '◉',
+    iconColor: 'text-ctp-green',
+    bg: 'bg-ctp-green/10',
+    border: 'border-ctp-green/20',
+    name: 'Watch',
+    tag: 'Observe output',
+    desc: 'Captures command output after it settles and pushes that context to the AI automatically.',
+  },
+  {
+    icon: '⚡',
+    iconColor: 'text-corix-accent',
+    bg: 'bg-corix-accent/10',
+    border: 'border-corix-accent/20',
+    name: 'Execute',
+    tag: 'Suggest next commands',
+    desc: 'Turns model suggestions into selectable command chips that you can confirm before running.',
+  },
+  {
+    icon: '🔧',
+    iconColor: 'text-ctp-peach',
+    bg: 'bg-ctp-peach/10',
+    border: 'border-ctp-peach/20',
+    name: 'Debug',
+    tag: 'Trigger on failure',
+    desc: 'Only reacts when the terminal output looks like an error path and proposes a fix.',
+  },
+];
+
+const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq', 'custom'];
 ---
 
 <Layout>
-  <!-- ── HERO ─────────────────────────────────────────────── -->
   <section class="relative overflow-hidden px-6">
-    <!-- Background blobs -->
-    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-corix-accent/[0.06] rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-ctp-blue/[0.05] rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-0 left-1/4 h-[520px] w-[520px] rounded-full bg-corix-accent/[0.06] blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 h-[420px] w-[420px] rounded-full bg-ctp-blue/[0.05] blur-3xl pointer-events-none"></div>
 
-    <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center py-12 md:py-24">
-      <!-- Text -->
+    <div class="mx-auto grid max-w-6xl items-center gap-12 py-12 md:grid-cols-2 md:py-24">
       <div class="reveal">
-<h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-ctp-text mb-6 leading-tight tracking-tight">
-          The terminal<br/>
-          <span class="gradient-text">that thinks</span>
+        <h1 class="mb-6 text-4xl font-bold leading-tight tracking-tight text-ctp-text sm:text-5xl md:text-6xl">
+          A terminal that keeps
+          <span class="gradient-text">the AI local to your flow</span>
         </h1>
-        <p class="text-ctp-subtext1 text-lg mb-8 leading-relaxed max-w-md">
-          corix embeds an AI panel directly in your terminal. Watch commands, detect errors, suggest fixes — all without leaving the CLI.
+        <p class="mb-8 max-w-xl text-lg leading-relaxed text-ctp-subtext1">
+          `corix` is the terminal UI. `corix-proxi` is the local API bridge. `corixp` handles setup for MongoDB, providers, shell integration, and the user service.
+        </p>
+        <p class="mb-8 max-w-xl text-sm leading-relaxed text-ctp-overlay0">
+          Linux is the only supported platform right now. macOS support is planned for a later release.
         </p>
         <div class="flex flex-wrap gap-4">
           <a href="#install" class="btn-primary">
-            <Icon name="lucide:download" class="w-4 h-4" />
-            Install now
+            <Icon name="lucide:download" class="h-4 w-4" />
+            Installation
           </a>
-          <a href="#modes" class="btn-secondary">
-            <Icon name="lucide:play-circle" class="w-4 h-4" />
-            See modes
+          <a href="/docs" class="btn-secondary">
+            <Icon name="lucide:book-open" class="h-4 w-4" />
+            Read docs
           </a>
         </div>
-        <!-- Stats -->
-        <div class="flex gap-8 mt-10 text-sm text-ctp-overlay0">
+        <div class="mt-10 grid grid-cols-3 gap-6 text-sm text-ctp-overlay0">
           <div>
-            <span class="block text-xl font-bold text-ctp-text">4</span>
+            <span class="block text-2xl font-bold text-ctp-text">3</span>
+            binaries
+          </div>
+          <div>
+            <span class="block text-2xl font-bold text-ctp-text">4</span>
             AI modes
           </div>
           <div>
-            <span class="block text-xl font-bold text-ctp-text">0ms</span>
-            Startup
-          </div>
-          <div>
-            <span class="block text-xl font-bold text-ctp-text">100%</span>
-            Keyboard-first
+            <span class="block text-2xl font-bold text-ctp-text">1</span>
+            local proxy
           </div>
         </div>
       </div>
 
-      <!-- Terminal preview -->
       <div class="hidden md:block reveal reveal-delay-2">
         <div class="terminal-window shadow-2xl shadow-black/50">
-          <!-- Chrome -->
           <div class="terminal-chrome">
-            <span class="w-3 h-3 rounded-full bg-ctp-red/80"></span>
-            <span class="w-3 h-3 rounded-full bg-ctp-yellow/80"></span>
-            <span class="w-3 h-3 rounded-full bg-ctp-green/80"></span>
-            <span class="ml-auto text-xs text-ctp-overlay0">corix — ~/projects/myapp</span>
+            <span class="h-3 w-3 rounded-full bg-ctp-red/80"></span>
+            <span class="h-3 w-3 rounded-full bg-ctp-yellow/80"></span>
+            <span class="h-3 w-3 rounded-full bg-ctp-green/80"></span>
+            <span class="ml-auto text-xs text-ctp-overlay0">corix + corix-proxi</span>
           </div>
-          <!-- Status bar -->
-          <div class="flex items-center gap-3 px-3 py-1.5 bg-ctp-surface0/60 text-xs border-b border-white/[0.05]">
-            <span class="bg-corix-accent text-ctp-base px-2 py-0.5 rounded font-bold">Agent</span>
-            <span class="text-ctp-overlay0">watch</span>
-            <span class="text-ctp-overlay0 ml-1">📁 myapp</span>
-            <span class="text-ctp-overlay0 ml-1"> main</span>
-            <span class="ml-auto text-ctp-overlay0">^O panel   ^Q quit</span>
+          <div class="border-b border-white/[0.05] bg-ctp-surface0/60 px-3 py-1.5 text-xs text-ctp-overlay0">
+            workspace: ~/Workspace/oceanstack/corix-website
           </div>
-          <!-- Terminal content -->
-          <div class="p-4 text-sm font-mono space-y-1 min-h-[200px]">
-            <div><span class="text-ctp-green">❯</span> <span class="text-ctp-text">docker compose up -d</span></div>
-            <div class="text-ctp-overlay0 pl-2">Starting containers...</div>
-            <div class="text-ctp-red pl-2">Error: port 5432 already in use</div>
-            <div class="text-ctp-overlay0 pl-2">...</div>
+          <div class="space-y-1 p-4 text-sm font-mono">
+            <div><span class="text-ctp-green">❯</span> <span class="text-ctp-text">corix --host 127.0.0.1 --port 4000</span></div>
+            <div class="pl-2 text-ctp-overlay0">connected to local proxy</div>
+            <div class="pl-2 text-ctp-overlay0">mode: watch</div>
+            <div class="pl-2 text-ctp-red">go test ./... failed in provider package</div>
           </div>
-          <!-- AI panel -->
           <div class="border-t border-white/[0.08]">
-            <div class="flex items-center justify-between px-4 py-2 text-xs text-ctp-overlay0 border-b border-white/[0.05]">
-              <span class="text-corix-accent font-bold">✦</span>
-              <span class="text-ctp-overlay0">watch</span>
-              <span class="ml-auto">esc  ^O</span>
+            <div class="flex items-center justify-between border-b border-white/[0.05] px-4 py-2 text-xs text-ctp-overlay0">
+              <span class="font-bold text-corix-accent">AI panel</span>
+              <span>/mode watch</span>
             </div>
-            <div class="p-4 text-xs font-mono space-y-1.5 bg-ctp-mantle/50">
-              <p class="text-ctp-subtext1">Port <span class="text-ctp-peach">5432</span> (PostgreSQL) is already in use. Another process is holding the port.</p>
-              <p class="text-ctp-subtext1 mt-2">To find and stop it:</p>
-              <p class="text-ctp-green pl-2">lsof -ti:5432 | xargs kill -9</p>
-            </div>
-            <div class="px-4 py-2 border-t border-white/[0.05]">
-              <div class="flex items-center gap-2 text-xs text-ctp-overlay0">
-                <span class="text-ctp-accent">❯</span>
-                <span class="text-ctp-overlay0/50">Message…</span>
-                <span class="ml-auto animate-blink text-corix-accent">█</span>
-              </div>
+            <div class="space-y-1.5 bg-ctp-mantle/50 p-4 text-xs font-mono">
+              <p class="text-ctp-subtext1">The active provider is reachable through `127.0.0.1:4000`.</p>
+              <p class="text-ctp-subtext1">The failing test came from the current workspace and the proxy has its conversation state in MongoDB.</p>
+              <p class="pl-2 text-ctp-green">Try: go test ./... -run Provider</p>
             </div>
           </div>
         </div>
@@ -97,144 +151,50 @@ import { Icon } from 'astro-icon/components';
     </div>
   </section>
 
-  <!-- ── FEATURES ──────────────────────────────────────────── -->
-  <section id="features" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16 reveal">
-        <h2 class="section-title">Everything you need,<br/><span class="gradient-text">nothing you don't</span></h2>
-        <p class="section-subtitle">A full terminal emulator with AI built at the core — not bolted on.</p>
+  <section class="px-6 py-24" id="features">
+    <div class="mx-auto max-w-6xl">
+      <div class="mb-16 text-center reveal">
+        <h2 class="section-title">What is actually installed</h2>
+        <p class="section-subtitle">A single installer drops the terminal, proxy server, and operator CLI on the machine.</p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        {[
-          {
-            icon: 'lucide:zap',
-            color: 'text-ctp-yellow',
-            bg: 'bg-ctp-yellow/10',
-            title: 'Zero overhead',
-            desc: 'Built in Go with bubbletea. Instant startup, no Electron, no Node — just a fast binary.',
-          },
-          {
-            icon: 'lucide:palette',
-            color: 'text-corix-accent',
-            bg: 'bg-corix-accent/10',
-            title: 'Catppuccin Mocha',
-            desc: 'Ships with the beloved Catppuccin Mocha theme. Easy on the eyes, even at 2am.',
-          },
-          {
-            icon: 'lucide:git-branch',
-            color: 'text-ctp-green',
-            bg: 'bg-ctp-green/10',
-            title: 'Git-aware status bar',
-            desc: 'Current folder, git branch, and mode always visible. No more context-switching.',
-          },
-          {
-            icon: 'lucide:mouse-pointer-2',
-            color: 'text-ctp-blue',
-            bg: 'bg-ctp-blue/10',
-            title: 'Mouse support',
-            desc: 'Click to select, scroll to browse history. Copy-on-select and middle-click paste.',
-          },
-          {
-            icon: 'lucide:search',
-            color: 'text-ctp-teal',
-            bg: 'bg-ctp-teal/10',
-            title: 'Built-in search',
-            desc: 'Press ^F to search through terminal output with live match highlighting.',
-          },
-          {
-            icon: 'lucide:keyboard',
-            color: 'text-ctp-peach',
-            bg: 'bg-ctp-peach/10',
-            title: 'Keyboard-first',
-            desc: '^O to toggle AI panel, ^G to switch focus, ^Q to quit. No mouse required.',
-          },
-        ].map((f, i) => (
-          <div class={`card reveal reveal-delay-${(i % 3) + 1}`}>
-            <div class={`inline-flex items-center justify-center w-10 h-10 rounded-lg ${f.bg} mb-4`}>
-              <Icon name={f.icon} class={`w-5 h-5 ${f.color}`} />
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {features.map((feature, index) => (
+          <div class={`card reveal reveal-delay-${(index % 3) + 1}`}>
+            <div class={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg ${feature.bg}`}>
+              <Icon name={feature.icon} class={`h-5 w-5 ${feature.color}`} />
             </div>
-            <h3 class="font-bold text-ctp-text mb-2">{f.title}</h3>
-            <p class="text-sm text-ctp-overlay0 leading-relaxed">{f.desc}</p>
+            <h3 class="mb-2 font-bold text-ctp-text">{feature.title}</h3>
+            <p class="text-sm leading-relaxed text-ctp-overlay0">{feature.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ── MODES ─────────────────────────────────────────────── -->
-  <section id="modes" class="py-24 px-6 relative overflow-hidden">
+  <section id="modes" class="relative overflow-hidden px-6 py-24">
     <div class="absolute inset-0 bg-ctp-mantle/40 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-corix-accent/[0.04] rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-corix-accent/[0.04] blur-3xl pointer-events-none"></div>
 
-    <div class="max-w-6xl mx-auto relative">
-      <div class="text-center mb-16 reveal">
-        <h2 class="section-title">Four modes,<br/><span class="gradient-text">one terminal</span></h2>
-        <p class="section-subtitle">Switch modes with <code class="text-corix-accent bg-corix-accent/10 px-1.5 py-0.5 rounded">/mode</code> and let corix adapt to how you work.</p>
+    <div class="relative mx-auto max-w-6xl">
+      <div class="mb-16 text-center reveal">
+        <h2 class="section-title">Four modes in one shell</h2>
+        <p class="section-subtitle">The runtime state stores the current panel position and active mode between sessions.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        {[
-          {
-            icon: '?',
-            iconColor: 'text-ctp-blue',
-            bg: 'bg-ctp-blue/10',
-            border: 'border-ctp-blue/20',
-            name: 'Default',
-            tag: 'Ask anything',
-            desc: 'Classic AI chat panel. Ask questions, get explanations, explore documentation — all without leaving the terminal.',
-            features: ['Markdown rendering', 'Conversation history', 'File path completion'],
-          },
-          {
-            icon: '◉',
-            iconColor: 'text-ctp-green',
-            bg: 'bg-ctp-green/10',
-            border: 'border-ctp-green/20',
-            name: 'Watch',
-            tag: 'Auto-context',
-            desc: 'Sends every command and its output to the AI automatically. Get instant context and suggestions as you work.',
-            features: ['Smart debounce — waits for output', 'Command + response captured', 'Zero extra keystrokes'],
-          },
-          {
-            icon: '⚡',
-            iconColor: 'text-corix-accent',
-            bg: 'bg-corix-accent/10',
-            border: 'border-corix-accent/20',
-            name: 'Execute',
-            tag: 'AI suggests, you confirm',
-            desc: 'The AI analyzes your commands and proposes next steps as selectable chips. Pick one and run it with Enter.',
-            features: ['Command chips with ↑↓ navigation', 'Confirm before running', 'AI-proposed commands via overlay'],
-          },
-          {
-            icon: '🔧',
-            iconColor: 'text-ctp-peach',
-            bg: 'bg-ctp-peach/10',
-            border: 'border-ctp-peach/20',
-            name: 'Debug',
-            tag: 'Error detection',
-            desc: 'Only triggers when the AI detects an error in the output. Explains what went wrong and gives the exact fix.',
-            features: ['Detects 15+ error patterns', 'Silent on success', 'Asks before running fixes'],
-          },
-        ].map((m, i) => (
-          <div class={`bg-ctp-surface0/30 rounded-xl p-6 border ${m.border} reveal reveal-delay-${i + 1} hover:bg-ctp-surface0/50 transition-all duration-300`}>
+      <div class="grid gap-6 md:grid-cols-2">
+        {modes.map((mode, index) => (
+          <div class={`rounded-xl border bg-ctp-surface0/30 p-6 transition-all duration-300 hover:bg-ctp-surface0/50 ${mode.border} reveal reveal-delay-${index + 1}`}>
             <div class="flex items-start gap-4">
-              <div class={`w-12 h-12 rounded-xl ${m.bg} flex items-center justify-center text-xl font-bold ${m.iconColor} shrink-0`}>
-                {m.icon}
+              <div class={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xl font-bold ${mode.bg} ${mode.iconColor}`}>
+                {mode.icon}
               </div>
               <div>
-                <div class="flex items-center gap-2 mb-1">
-                  <h3 class="font-bold text-ctp-text text-lg">{m.name}</h3>
-                  <span class={`text-xs px-2 py-0.5 rounded-full ${m.bg} ${m.iconColor}`}>{m.tag}</span>
+                <div class="mb-1 flex items-center gap-2">
+                  <h3 class="text-lg font-bold text-ctp-text">{mode.name}</h3>
+                  <span class={`rounded-full px-2 py-0.5 text-xs ${mode.bg} ${mode.iconColor}`}>{mode.tag}</span>
                 </div>
-                <p class="text-ctp-overlay0 text-sm leading-relaxed mb-4">{m.desc}</p>
-                <ul class="space-y-1.5">
-                  {m.features.map(f => (
-                    <li class="flex items-center gap-2 text-sm text-ctp-subtext1">
-                      <Icon name="lucide:check" class={`w-3.5 h-3.5 shrink-0 ${m.iconColor}`} />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+                <p class="text-sm leading-relaxed text-ctp-overlay0">{mode.desc}</p>
               </div>
             </div>
           </div>
@@ -243,269 +203,193 @@ import { Icon } from 'astro-icon/components';
     </div>
   </section>
 
-  <!-- ── PRICING ──────────────────────────────────────────────── -->
-  <section id="pricing" class="py-24 px-6 relative overflow-hidden">
-    <div class="absolute inset-0 bg-ctp-mantle/30 pointer-events-none"></div>
-    <div class="max-w-6xl mx-auto relative">
-      <div class="text-center mb-16 reveal">
-        <h2 class="section-title">Simple pricing,<br/><span class="gradient-text">no surprises</span></h2>
-        <p class="section-subtitle">Bring your own API key from any provider. We charge for the software, not the tokens.</p>
-      </div>
-
-      <!-- Pricing cards -->
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-6 mb-16">
-        <!-- Starter -->
-        <div class="card reveal reveal-delay-1 flex flex-col">
-          <div class="mb-4">
-            <h3 class="font-bold text-ctp-text text-xl mb-1">Starter</h3>
-            <p class="text-ctp-overlay0 text-sm">For solo devs</p>
-          </div>
-          <div class="mb-6">
-            <span class="text-4xl font-bold text-ctp-text">$2</span>
-            <span class="text-ctp-overlay0 text-sm">/month</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-1">
-            {[
-              'corix terminal',
-              'Default mode (ask)',
-              'Watch mode',
-              'Bring your own API key',
-              'Any AI provider',
-              'corix-proxy included',
-              'Catppuccin theme',
-              'Mouse & search',
-            ].map(f => (
-              <li class="flex items-center gap-2 text-sm text-ctp-subtext1">
-                <Icon name="lucide:check" class="w-4 h-4 text-ctp-green shrink-0" />
-                {f}
-              </li>
-            ))}
-            {['Execute mode', 'Debug mode', 'Priority support'].map(f => (
-              <li class="flex items-center gap-2 text-sm text-ctp-overlay0">
-                <Icon name="lucide:minus" class="w-4 h-4 text-ctp-surface1 shrink-0" />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <a href="#install" class="btn-secondary justify-center">Get started</a>
-        </div>
-
-        <!-- Pro — highlighted -->
-        <div class="relative rounded-xl p-6 border border-corix-accent/40 bg-corix-accent/[0.05] flex flex-col reveal reveal-delay-2 scale-[1.03] shadow-[0_0_40px_0_rgba(203,166,247,0.12)]">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-            <span class="bg-corix-accent text-ctp-base text-xs font-bold px-3 py-1 rounded-full">Most popular</span>
-          </div>
-          <div class="mb-4">
-            <h3 class="font-bold text-ctp-text text-xl mb-1">Pro</h3>
-            <p class="text-ctp-overlay0 text-sm">For power users</p>
-          </div>
-          <div class="mb-6">
-            <span class="text-4xl font-bold text-ctp-text">$5</span>
-            <span class="text-ctp-overlay0 text-sm">/month</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-1">
-            {[
-              'Everything in Starter',
-              'Execute mode',
-              'Debug mode',
-              'Priority bug fixes',
-              'Early access to new features',
-              'Community Discord access',
-            ].map(f => (
-              <li class="flex items-center gap-2 text-sm text-ctp-subtext1">
-                <Icon name="lucide:check" class="w-4 h-4 text-corix-accent shrink-0" />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <a href="#install" class="btn-primary justify-center">Get Pro</a>
-        </div>
-
-        <!-- Teams -->
-        <div class="relative rounded-xl p-6 border border-ctp-blue/30 bg-ctp-blue/[0.04] flex flex-col reveal reveal-delay-3">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-            <span class="bg-ctp-blue text-ctp-base text-xs font-bold px-3 py-1 rounded-full">Teams & Enterprise</span>
-          </div>
-          <div class="mb-4">
-            <h3 class="font-bold text-ctp-text text-xl mb-1">Team</h3>
-            <p class="text-ctp-overlay0 text-sm">For engineering teams</p>
-          </div>
-          <div class="mb-6">
-            <span class="text-4xl font-bold text-ctp-text">$20</span>
-            <span class="text-ctp-overlay0 text-sm">/user/month</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-1">
-            {[
-              'Everything in Pro',
-              'Priority support (24h SLA)',
-              'Priority feature requests',
-              'Early access to all updates',
-              'Dedicated onboarding',
-              'Custom AI provider config',
-              'Team license management',
-              'Invoice billing available',
-            ].map(f => (
-              <li class="flex items-center gap-2 text-sm text-ctp-subtext1">
-                <Icon name="lucide:check" class="w-4 h-4 text-ctp-blue shrink-0" />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <a href="mailto:hello@corix.dev" class="btn-secondary justify-center border-ctp-blue/30 hover:border-ctp-blue/60">
-            <Icon name="lucide:mail" class="w-4 h-4" />
-            Contact us
-          </a>
-        </div>
-      </div>
-
-      <!-- Comparison bar -->
-      <div class="mb-12 reveal reveal-delay-2 bg-ctp-surface0/30 rounded-xl border border-white/[0.06] overflow-hidden">
-        <div class="grid grid-cols-5 text-xs text-ctp-overlay0 uppercase tracking-wider border-b border-white/[0.06]">
-          <div class="col-span-1 px-4 py-3">Tool</div>
-          <div class="px-4 py-3 text-center">Price</div>
-          <div class="px-4 py-3 text-center hidden md:block">Native binary</div>
-          <div class="px-4 py-3 text-center hidden md:block">Any AI provider</div>
-          <div class="px-4 py-3 text-center">AI modes</div>
-        </div>
-        {[
-          { name: 'Warp',             price: '$22/user', native: false, anyKey: false, modes: '1' },
-          { name: 'Copilot CLI',      price: '$10/mo',   native: false, anyKey: false, modes: '—' },
-          { name: 'Cursor',           price: '$20/mo',   native: false, anyKey: false, modes: '—' },
-          { name: 'corix Pro',       price: '$5/mo',    native: true,  anyKey: true,  modes: '4', highlight: true },
-        ].map(r => (
-          <div class={`grid grid-cols-5 text-sm border-b border-white/[0.04] last:border-0 ${r.highlight ? 'bg-corix-accent/[0.05]' : ''}`}>
-            <div class={`col-span-1 px-4 py-3 font-medium ${r.highlight ? 'text-corix-accent' : 'text-ctp-text'}`}>
-              {r.highlight
-                ? r.name
-                : <span class="blur-sm select-none">{r.name}</span>}
-            </div>
-            <div class={`px-4 py-3 text-center font-mono ${r.highlight ? 'text-ctp-green font-bold' : 'text-ctp-red'}`}>{r.price}</div>
-            <div class="px-4 py-3 text-center hidden md:flex items-center justify-center">
-              {r.native
-                ? <Icon name="lucide:check" class="w-4 h-4 text-ctp-green" />
-                : <Icon name="lucide:x" class="w-4 h-4 text-ctp-surface2" />}
-            </div>
-            <div class="px-4 py-3 text-center hidden md:flex items-center justify-center">
-              {r.anyKey
-                ? <Icon name="lucide:check" class="w-4 h-4 text-ctp-green" />
-                : <Icon name="lucide:x" class="w-4 h-4 text-ctp-surface2" />}
-            </div>
-            <div class={`px-4 py-3 text-center ${r.highlight ? 'text-corix-accent font-bold' : 'text-ctp-overlay0'}`}>{r.modes}</div>
-          </div>
-        ))}
-      </div>
-
-      <!-- Advantage pills -->
-      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 reveal reveal-delay-2">
-        {[
-          { icon: 'lucide:key', color: 'text-ctp-green', title: 'Your API key', desc: 'Connect DeepSeek, OpenAI, Anthropic, or local Ollama. Zero lock-in.' },
-          { icon: 'lucide:cpu', color: 'text-ctp-blue', title: 'Native binary', desc: 'Go binary, no Electron, no Node. Starts in milliseconds.' },
-          { icon: 'lucide:dollar-sign', color: 'text-corix-accent', title: '4× cheaper', desc: '$5/mo vs $22/mo for Warp. Same AI power, less overhead.' },
-          { icon: 'lucide:wifi-off', color: 'text-ctp-peach', title: 'Works offline', desc: 'Terminal works without internet. AI only needs your key.' },
-        ].map(a => (
-          <div class="bg-ctp-surface0/30 rounded-lg p-4 border border-white/[0.06] text-center">
-            <div class={`inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/[0.05] mb-3 ${a.color}`}>
-              <Icon name={a.icon} class="w-4 h-4" />
-            </div>
-            <h4 class="font-bold text-ctp-text text-sm mb-1">{a.title}</h4>
-            <p class="text-ctp-overlay0 text-xs leading-relaxed">{a.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ── INSTALL ────────────────────────────────────────────── -->
-  <section id="install" class="py-24 px-6">
-    <div class="max-w-3xl mx-auto">
+  <section id="install" class="px-6 py-24">
+    <div class="mx-auto max-w-4xl">
       <div class="text-center reveal">
-        <h2 class="section-title">Up and running in<br/><span class="gradient-text">two commands</span></h2>
-        <p class="section-subtitle">corix + corix-proxy. One installs the terminal, the other connects your AI provider.</p>
+        <h2 class="section-title">Install everything with one command</h2>
+        <p class="section-subtitle">The distributed installer downloads one platform bundle and installs `corix`, `corix-proxi`, and `corixp` together.</p>
       </div>
 
-      <div class="space-y-4 reveal reveal-delay-1 text-left">
-        <!-- One-liner install -->
-        <div class="terminal-window">
+      <div class="mt-10 space-y-5 text-left">
+        <div class="terminal-window reveal reveal-delay-1">
           <div class="terminal-chrome">
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/60"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/60"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/60"></span>
-            <span class="ml-3 text-xs text-ctp-overlay0 font-bold">Step 1 — Install both binaries</span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/60"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/60"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/60"></span>
+            <span class="ml-3 text-xs font-bold text-ctp-overlay0">Step 1</span>
           </div>
-          <pre class="p-4 text-sm font-mono overflow-x-auto"><code><span class="text-ctp-overlay0"># installs corix + corix-proxy</span>
+          <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-overlay0"># install corix, corix-proxi, and corixp</span>
 <span class="text-ctp-green">curl -fsSL https://corix.dev/install.sh | sh</span></code></pre>
         </div>
 
-        <!-- Configure proxy -->
-        <div class="terminal-window">
+        <div class="terminal-window reveal reveal-delay-2">
           <div class="terminal-chrome">
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/60"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/60"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/60"></span>
-            <span class="ml-3 text-xs text-ctp-overlay0 font-bold">Step 2 — Connect your API key</span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/60"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/60"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/60"></span>
+            <span class="ml-3 text-xs font-bold text-ctp-overlay0">Step 2</span>
           </div>
-          <pre class="p-4 text-sm font-mono overflow-x-auto"><code><span class="text-ctp-overlay0"># set your provider (DeepSeek, OpenAI, Ollama…)</span>
-<span class="text-ctp-green">corix-proxy init</span>
+          <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-overlay0"># bootstrap MongoDB and provider setup</span>
+<span class="text-ctp-green">corixp init</span>
 
-<span class="text-ctp-overlay0">  Provider  → deepseek</span>
-<span class="text-ctp-overlay0">  API key   → sk-••••••••••••••••</span>
-<span class="text-ctp-overlay0">  ✓ Config saved to ~/.config/corix-proxy/config</span></code></pre>
+<span class="text-ctp-overlay0"># activate your beta license</span>
+<span class="text-ctp-green">corixp auth login</span></code></pre>
         </div>
 
-        <!-- Run -->
-        <div class="terminal-window">
+        <div class="terminal-window reveal reveal-delay-3">
           <div class="terminal-chrome">
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-red/60"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-yellow/60"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-ctp-green/60"></span>
-            <span class="ml-3 text-xs text-ctp-overlay0 font-bold">Step 3 — Launch</span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/60"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/60"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/60"></span>
+            <span class="ml-3 text-xs font-bold text-ctp-overlay0">Step 3</span>
           </div>
-          <pre class="p-4 text-sm font-mono overflow-x-auto"><code><span class="text-ctp-green">corix-proxy service start</span>   <span class="text-ctp-overlay0"># runs in background</span>
-<span class="text-ctp-green">corix</span>                        <span class="text-ctp-overlay0"># open the terminal</span>
+          <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-overlay0"># start the proxy</span>
+<span class="text-ctp-green">corix-proxi</span>
 
-<span class="text-ctp-overlay0">  ^O  →  toggle AI panel</span>
-<span class="text-ctp-overlay0">  ^G  →  switch focus</span>
-<span class="text-ctp-overlay0">  /mode  →  switch AI mode</span></code></pre>
+<span class="text-ctp-overlay0"># open the TUI</span>
+<span class="text-ctp-green">corix</span></code></pre>
         </div>
       </div>
 
-      <!-- Supported providers -->
-      <div class="mt-8 reveal reveal-delay-3">
-        <p class="text-xs text-ctp-overlay0 mb-3 uppercase tracking-wider text-center">Supported providers</p>
-        <div class="flex flex-wrap justify-center gap-3">
-          {['DeepSeek', 'OpenAI', 'Anthropic', 'Ollama (local)', 'Groq', 'Mistral'].map(p => (
-            <span class="text-xs border border-white/[0.08] text-ctp-subtext1 px-3 py-1.5 rounded-full bg-white/[0.02]">{p}</span>
-          ))}
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <div class="card p-5">
+          <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Binaries</p>
+          <p class="text-sm leading-relaxed text-ctp-subtext1">The installer puts `corix`, `corix-proxi`, and `corixp` in the same bin directory and creates `cor -> corix`.</p>
+        </div>
+        <div class="card p-5">
+          <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Proxy default</p>
+          <p class="text-sm leading-relaxed text-ctp-subtext1">The normal user flow should just be `corix-proxi` and then `corix`. Extra flags should not be necessary in the website onboarding.</p>
+        </div>
+        <div class="card p-5">
+          <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Release bundle</p>
+          <p class="text-sm leading-relaxed text-ctp-subtext1">Each platform release should ship a single `.tar.gz` containing those 3 binaries so install stays atomic and predictable.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 card border border-ctp-yellow/20 bg-ctp-yellow/5 p-5">
+        <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-yellow">API cost warning</p>
+        <p class="text-sm leading-relaxed text-ctp-subtext1">
+          `ai-suggest`, inline assist, and the non-default AI modes can hit `corix-proxi` repeatedly. If those requests go to a paid remote API, credits can disappear fast. For high-frequency paths, prefer `ollama` with a lightweight local model instead of a large hosted model.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="px-6 py-24">
+    <div class="mx-auto max-w-5xl">
+      <div class="mb-16 text-center reveal">
+        <h2 class="section-title">Pricing</h2>
+        <p class="section-subtitle">The pricing direction should stay simple: Corix charges for support and premium features, not for basic access to the terminal itself.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="card reveal reveal-delay-1 p-7">
+          <p class="mb-3 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Current access</p>
+          <h3 class="mb-2 text-2xl font-bold text-ctp-text">Corix</h3>
+          <p class="mb-6 text-4xl font-bold text-ctp-subtext1">Core access</p>
+          <p class="mb-6 text-sm leading-relaxed text-ctp-subtext1">
+            The base product stays simple: install the binaries, run `corixp init`, authenticate with `corixp auth login`, start `corix-proxi`, and open `corix`.
+          </p>
+          <div class="space-y-3 text-sm text-ctp-subtext1">
+            <p>Terminal UI, local proxy, and operator CLI</p>
+            <p>Single active provider</p>
+            <p>Linux support available now</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-delay-2 p-7">
+          <p class="mb-3 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Commercial rollout</p>
+          <h3 class="mb-2 text-2xl font-bold text-ctp-text">Support and features</h3>
+          <p class="mb-6 text-4xl font-bold text-ctp-subtext1">From 2 USD</p>
+          <p class="mb-6 text-sm leading-relaxed text-ctp-subtext1">
+            The paid side can stay focused on support quality, premium features, and team capabilities instead of charging for the core terminal workflow.
+          </p>
+          <div class="space-y-3 text-sm text-ctp-subtext1">
+            <p>`2 USD` Personal: premium features for individuals</p>
+            <p>`5 USD` Pro: priority features, earlier releases, and faster fixes</p>
+            <p>`20 USD` Enterprise: team support, compatibility with private company models, dedicated deployments by the Corix team, company-owned model infrastructure, and stronger privacy options</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="py-24 px-6 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-corix-accent/[0.06] via-transparent to-ctp-blue/[0.04] pointer-events-none"></div>
-    <!-- Coral -->
-    <div class="absolute -left-20 bottom-0 w-[500px] opacity-20 pointer-events-none select-none mix-blend-lighten">
-      <img src="/coral.png" alt="" aria-hidden="true" class="w-full object-contain" />
+  <section class="relative overflow-hidden px-6 py-24">
+    <img
+      src="/coral.png"
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute right-[-8rem] bottom-[-6rem] w-[28rem] max-w-none opacity-[0.08] blur-[1px] select-none"
+    />
+    <div class="mx-auto max-w-5xl">
+      <div class="mb-16 text-center reveal">
+        <h2 class="section-title">Why this feels better</h2>
+        <p class="section-subtitle">The strongest part of corix is not a marketing claim. It is how the workflow stays inside the terminal instead of bouncing between separate surfaces.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="card reveal reveal-delay-1 border-corix-accent/30 bg-corix-accent/10 p-7">
+          <p class="mb-3 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Corix</p>
+          <h3 class="mb-4 text-2xl font-bold text-corix-accent">Built around the terminal</h3>
+          <div class="space-y-3 text-sm leading-relaxed text-ctp-subtext1">
+            <p>AI panel and shell stay in one interface.</p>
+            <p>Workspace context is carried into the proxy instead of living in a separate app.</p>
+            <p>Suggest, watch, execute, and debug are part of the same terminal flow.</p>
+            <p>Local proxy and Ollama support make local-first setups practical.</p>
+            <p>Private company models and company-owned model infrastructure fit the product direction better.</p>
+            <p>Lower entry pricing can stay simple instead of forcing a high monthly plan first.</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-delay-2 border-ctp-red/25 bg-ctp-red/5 p-7">
+          <p class="mb-3 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Typical alternative flow</p>
+          <h3 class="mb-4 text-2xl font-bold text-ctp-red">More context switching</h3>
+          <div class="space-y-3 text-sm leading-relaxed text-ctp-subtext1">
+            <p><span class="font-semibold text-ctp-red">Split surfaces:</span> terminal and AI usually live in different places.</p>
+            <p><span class="font-semibold text-ctp-red">Lost context:</span> repo state often needs to be re-explained or reattached.</p>
+            <p><span class="font-semibold text-ctp-red">Weaker shell link:</span> suggestions and debugging are less connected to the live shell state.</p>
+            <p><span class="font-semibold text-ctp-red">Local models second:</span> local-first workflows are often secondary instead of first-class.</p>
+            <p><span class="font-semibold text-ctp-red">Higher price floor:</span> stronger AI workflows often start behind higher monthly plans.</p>
+            <p><span class="font-semibold text-ctp-red">Model freedom limited:</span> BYOK, private company models, and dedicated deployments are often restricted to paid or enterprise tiers.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="max-w-3xl mx-auto text-center reveal">
-      <h2 class="section-title">Your terminal,<br/><span class="gradient-text">supercharged</span></h2>
-      <p class="section-subtitle">$5/month. Your API key. Any provider. Cancel anytime.</p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="#install" class="btn-primary">
-          <Icon name="lucide:zap" class="w-4 h-4" />
-          Start for free
+  </section>
+
+  <section class="relative overflow-hidden px-6 py-24">
+    <div class="absolute inset-0 bg-gradient-to-br from-corix-accent/[0.06] via-transparent to-ctp-blue/[0.04] pointer-events-none"></div>
+    <div class="mx-auto max-w-4xl text-center reveal">
+      <h2 class="section-title">Supported provider presets</h2>
+      <p class="section-subtitle">The current CLI ships built-in presets for local and hosted providers and also allows custom OpenAI-compatible endpoints.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        {providers.map((provider) => (
+          <span class="rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1.5 text-xs text-ctp-subtext1">{provider}</span>
+        ))}
+      </div>
+      <div class="mx-auto mt-8 max-w-3xl rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 text-left">
+        <p class="mb-2 text-sm font-semibold text-ctp-text">Recommended single-provider setup</p>
+        <p class="text-sm leading-relaxed text-ctp-subtext1">
+          Right now `corix-proxi` uses one active provider at a time. If you plan to keep suggest, inline assist, watch, execute, or debug enabled, the safest single-provider choice is `ollama` with `gemma4:latest`.
+        </p>
+      </div>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a href="/docs" class="btn-primary">
+          <Icon name="lucide:book-open" class="h-4 w-4" />
+          Open documentation
         </a>
       </div>
-      <p class="text-xs text-ctp-overlay0 mt-6">Free tier available · No credit card to try</p>
     </div>
   </section>
 </Layout>
 
 <script>
   const observer = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    (entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    }),
     { threshold: 0.1 }
   );
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 </script>
