@@ -5,6 +5,6 @@ import icon from "astro-icon";
 export default defineConfig({
   integrations: [tailwind(), icon({ include: { lucide: ["*"] } })],
   output: "static",
-  site: "https://corix.dev",
+  site: "https://coren.dev",
   base: "/",
 });

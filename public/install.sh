@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 set -eu
 
-APP_NAME="corix"
-SERVER_BIN="corix-proxi"
-CLI_BIN="corixp"
+APP_NAME="coren"
+SERVER_BIN="coren-proxi"
+CLI_BIN="corend"
 ALIAS_BIN="cor"
 
-RELEASES_BASE_URL="${RELEASES_BASE_URL:-https://corix.dev/releases}"
+RELEASES_BASE_URL="${RELEASES_BASE_URL:-https://coren.dev/releases}"
 VERSION="${VERSION:-latest}"
 INSTALL_DIR="${INSTALL_DIR:-}"
 CHECKSUMS_FILE="SHA256SUMS"
@@ -86,7 +86,7 @@ prompt_install_dir() {
 build_download_url() {
   os="$1"
   arch="$2"
-  bundle="corix_${os}_${arch}.tar.gz"
+  bundle="coren_${os}_${arch}.tar.gz"
 
   if [ "$VERSION" = "latest" ]; then
     printf '%s\n' "${RELEASES_BASE_URL}/latest/${bundle}"
@@ -176,7 +176,7 @@ ensure_path_in_rc() {
 
   {
     printf '\n'
-    printf '# corix\n'
+    printf '# coren\n'
     printf 'export PATH="%s:$PATH"\n' "$dir"
   } >> "$rc_file"
 
@@ -216,7 +216,7 @@ OS="$(detect_os)"
 ARCH="$(detect_arch)"
 URL="$(build_download_url "$OS" "$ARCH")"
 CHECKSUMS_URL="$(build_checksums_url)"
-BUNDLE_NAME="corix_${OS}_${ARCH}.tar.gz"
+BUNDLE_NAME="coren_${OS}_${ARCH}.tar.gz"
 
 if [ -z "${INSTALL_DIR}" ]; then
   INSTALL_TARGET="$(prompt_install_dir)"
@@ -225,7 +225,7 @@ else
 fi
 
 TMP_DIR="$(mktemp -d)"
-ARCHIVE_PATH="$TMP_DIR/corix.tar.gz"
+ARCHIVE_PATH="$TMP_DIR/coren.tar.gz"
 CHECKSUMS_PATH="$TMP_DIR/$CHECKSUMS_FILE"
 cleanup() {
   rm -rf "$TMP_DIR"
@@ -293,9 +293,9 @@ fi
 
 echo ""
 echo "Next steps:"
-echo "  1. corixp init"
-echo "  2. corix --host 127.0.0.1 --port 4000"
+echo "  1. corend init"
+echo "  2. coren --host 127.0.0.1 --port 4000"
 echo ""
 echo "Optional:"
-echo "  - If you install the proxy as a user service later: corixp service install"
-echo "  - If you prefer a fixed config: set proxy-url = http://127.0.0.1:4000 in ~/.config/corix/config"
+echo "  - If you install the proxy as a user service later: corend service install"
+echo "  - If you prefer a fixed config: set proxy-url = http://127.0.0.1:4000 in ~/.config/coren/config"

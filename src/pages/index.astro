@@ -5,8 +5,8 @@ import { Icon } from 'astro-icon/components';
 const features = [
   {
     icon: 'lucide:square-terminal',
-    color: 'text-corix-accent',
-    bg: 'bg-corix-accent/10',
+    color: 'text-coren-accent',
+    bg: 'bg-coren-accent/10',
     title: 'Terminal first',
     desc: 'A Go terminal interface with scrollback, mouse support, live shell session rendering, and an AI panel inside the same screen.',
   },
@@ -22,14 +22,14 @@ const features = [
     color: 'text-ctp-blue',
     bg: 'bg-ctp-blue/10',
     title: 'Workspace aware',
-    desc: 'The shell integration writes `CORIX_WORKSPACE` so the proxy can keep the current repo as operating context.',
+    desc: 'The shell integration writes `COREN_WORKSPACE` so the proxy can keep the current repo as operating context.',
   },
   {
     icon: 'lucide:database',
     color: 'text-ctp-green',
     bg: 'bg-ctp-green/10',
     title: 'Local proxy',
-    desc: '`corix-proxi` runs locally, stores providers and conversations in MongoDB, and exposes the API that corix consumes.',
+    desc: '`coren-proxi` runs locally, stores providers and conversations in MongoDB, and exposes the API that coren consumes.',
   },
 ];
 
@@ -54,9 +54,9 @@ const modes = [
   },
   {
     icon: '⚡',
-    iconColor: 'text-corix-accent',
-    bg: 'bg-corix-accent/10',
-    border: 'border-corix-accent/20',
+    iconColor: 'text-coren-accent',
+    bg: 'bg-coren-accent/10',
+    border: 'border-coren-accent/20',
     name: 'Execute',
     tag: 'Suggest next commands',
     desc: 'Turns model suggestions into selectable command chips that you can confirm before running.',
@@ -77,7 +77,7 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
 
 <Layout>
   <section class="relative overflow-hidden px-6">
-    <div class="absolute top-0 left-1/4 h-[520px] w-[520px] rounded-full bg-corix-accent/[0.06] blur-3xl pointer-events-none"></div>
+    <div class="absolute top-0 left-1/4 h-[520px] w-[520px] rounded-full bg-coren-accent/[0.06] blur-3xl pointer-events-none"></div>
     <div class="absolute bottom-0 right-1/4 h-[420px] w-[420px] rounded-full bg-ctp-blue/[0.05] blur-3xl pointer-events-none"></div>
 
     <div class="mx-auto grid max-w-6xl items-center gap-12 py-12 md:grid-cols-2 md:py-24">
@@ -87,7 +87,7 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
           <span class="gradient-text">the AI local to your flow</span>
         </h1>
         <p class="mb-8 max-w-xl text-lg leading-relaxed text-ctp-subtext1">
-          `corix` is the terminal UI. `corix-proxi` is the local API bridge. `corixp` handles setup for MongoDB, providers, shell integration, and the user service.
+          `coren` is the terminal UI. `coren-proxi` is the local API bridge. `corend` handles setup for MongoDB, providers, shell integration, and the user service.
         </p>
         <p class="mb-8 max-w-xl text-sm leading-relaxed text-ctp-overlay0">
           Linux is the only supported platform right now. macOS support is planned for a later release.
@@ -124,20 +124,20 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
             <span class="h-3 w-3 rounded-full bg-ctp-red/80"></span>
             <span class="h-3 w-3 rounded-full bg-ctp-yellow/80"></span>
             <span class="h-3 w-3 rounded-full bg-ctp-green/80"></span>
-            <span class="ml-auto text-xs text-ctp-overlay0">corix + corix-proxi</span>
+            <span class="ml-auto text-xs text-ctp-overlay0">coren + coren-proxi</span>
           </div>
           <div class="border-b border-white/[0.05] bg-ctp-surface0/60 px-3 py-1.5 text-xs text-ctp-overlay0">
-            workspace: ~/Workspace/oceanstack/corix-website
+            workspace: ~/Workspace/oceanstack/coren-website
           </div>
           <div class="space-y-1 p-4 text-sm font-mono">
-            <div><span class="text-ctp-green">❯</span> <span class="text-ctp-text">corix --host 127.0.0.1 --port 4000</span></div>
+            <div><span class="text-ctp-green">❯</span> <span class="text-ctp-text">coren --host 127.0.0.1 --port 4000</span></div>
             <div class="pl-2 text-ctp-overlay0">connected to local proxy</div>
             <div class="pl-2 text-ctp-overlay0">mode: watch</div>
             <div class="pl-2 text-ctp-red">go test ./... failed in provider package</div>
           </div>
           <div class="border-t border-white/[0.08]">
             <div class="flex items-center justify-between border-b border-white/[0.05] px-4 py-2 text-xs text-ctp-overlay0">
-              <span class="font-bold text-corix-accent">AI panel</span>
+              <span class="font-bold text-coren-accent">AI panel</span>
               <span>/mode watch</span>
             </div>
             <div class="space-y-1.5 bg-ctp-mantle/50 p-4 text-xs font-mono">
@@ -174,7 +174,7 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
 
   <section id="modes" class="relative overflow-hidden px-6 py-24">
     <div class="absolute inset-0 bg-ctp-mantle/40 pointer-events-none"></div>
-    <div class="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-corix-accent/[0.04] blur-3xl pointer-events-none"></div>
+    <div class="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-coren-accent/[0.04] blur-3xl pointer-events-none"></div>
 
     <div class="relative mx-auto max-w-6xl">
       <div class="mb-16 text-center reveal">
@@ -207,7 +207,7 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
     <div class="mx-auto max-w-4xl">
       <div class="text-center reveal">
         <h2 class="section-title">Install everything with one command</h2>
-        <p class="section-subtitle">The distributed installer downloads one platform bundle and installs `corix`, `corix-proxi`, and `corixp` together.</p>
+        <p class="section-subtitle">The distributed installer downloads one platform bundle and installs `coren`, `coren-proxi`, and `corend` together.</p>
       </div>
 
       <div class="mt-10 space-y-5 text-left">
@@ -218,8 +218,8 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
             <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/60"></span>
             <span class="ml-3 text-xs font-bold text-ctp-overlay0">Step 1</span>
           </div>
-          <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-overlay0"># install corix, corix-proxi, and corixp</span>
-<span class="text-ctp-green">curl -fsSL https://corix.dev/install.sh | sh</span></code></pre>
+          <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-overlay0"># install coren, coren-proxi, and corend</span>
+<span class="text-ctp-green">curl -fsSL https://coren.dev/install.sh | sh</span></code></pre>
         </div>
 
         <div class="terminal-window reveal reveal-delay-2">
@@ -230,10 +230,10 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
             <span class="ml-3 text-xs font-bold text-ctp-overlay0">Step 2</span>
           </div>
           <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-overlay0"># bootstrap MongoDB and provider setup</span>
-<span class="text-ctp-green">corixp init</span>
+<span class="text-ctp-green">corend init</span>
 
 <span class="text-ctp-overlay0"># activate your beta license</span>
-<span class="text-ctp-green">corixp auth login</span></code></pre>
+<span class="text-ctp-green">corend auth login</span></code></pre>
         </div>
 
         <div class="terminal-window reveal reveal-delay-3">
@@ -244,21 +244,21 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
             <span class="ml-3 text-xs font-bold text-ctp-overlay0">Step 3</span>
           </div>
           <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-overlay0"># start the proxy</span>
-<span class="text-ctp-green">corix-proxi</span>
+<span class="text-ctp-green">coren-proxi</span>
 
 <span class="text-ctp-overlay0"># open the TUI</span>
-<span class="text-ctp-green">corix</span></code></pre>
+<span class="text-ctp-green">coren</span></code></pre>
         </div>
       </div>
 
       <div class="mt-8 grid gap-4 md:grid-cols-3">
         <div class="card p-5">
           <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Binaries</p>
-          <p class="text-sm leading-relaxed text-ctp-subtext1">The installer puts `corix`, `corix-proxi`, and `corixp` in the same bin directory and creates `cor -> corix`.</p>
+          <p class="text-sm leading-relaxed text-ctp-subtext1">The installer puts `coren`, `coren-proxi`, and `corend` in the same bin directory and creates `cor -> coren`.</p>
         </div>
         <div class="card p-5">
           <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Proxy default</p>
-          <p class="text-sm leading-relaxed text-ctp-subtext1">The normal user flow should just be `corix-proxi` and then `corix`. Extra flags should not be necessary in the website onboarding.</p>
+          <p class="text-sm leading-relaxed text-ctp-subtext1">The normal user flow should just be `coren-proxi` and then `coren`. Extra flags should not be necessary in the website onboarding.</p>
         </div>
         <div class="card p-5">
           <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Release bundle</p>
@@ -282,7 +282,7 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
           <h3 class="mb-2 text-2xl font-bold text-ctp-text">Corix</h3>
           <p class="mb-6 text-4xl font-bold text-ctp-subtext1">Core access</p>
           <p class="mb-6 text-sm leading-relaxed text-ctp-subtext1">
-            The base product stays simple: install the binaries, run `corixp init`, authenticate with `corixp auth login`, start `corix-proxi`, and open `corix`.
+            The base product stays simple: install the binaries, run `corend init`, authenticate with `corend auth login`, start `coren-proxi`, and open `coren`.
           </p>
           <div class="space-y-3 text-sm text-ctp-subtext1">
             <p>Terminal UI, local proxy, and operator CLI</p>
@@ -318,13 +318,13 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
     <div class="mx-auto max-w-5xl">
       <div class="mb-16 text-center reveal">
         <h2 class="section-title">Why this feels better</h2>
-        <p class="section-subtitle">The strongest part of corix is not a marketing claim. It is how the workflow stays inside the terminal instead of bouncing between separate surfaces.</p>
+        <p class="section-subtitle">The strongest part of coren is not a marketing claim. It is how the workflow stays inside the terminal instead of bouncing between separate surfaces.</p>
       </div>
 
       <div class="grid gap-6 md:grid-cols-2">
-        <div class="card reveal reveal-delay-1 border-corix-accent/30 bg-corix-accent/10 p-7">
+        <div class="card reveal reveal-delay-1 border-coren-accent/30 bg-coren-accent/10 p-7">
           <p class="mb-3 text-xs uppercase tracking-[0.2em] text-ctp-overlay0">Corix</p>
-          <h3 class="mb-4 text-2xl font-bold text-corix-accent">Built around the terminal</h3>
+          <h3 class="mb-4 text-2xl font-bold text-coren-accent">Built around the terminal</h3>
           <div class="space-y-3 text-sm leading-relaxed text-ctp-subtext1">
             <p>AI panel and shell stay in one interface.</p>
             <p>Workspace context is carried into the proxy instead of living in a separate app.</p>
@@ -352,7 +352,7 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
   </section>
 
   <section class="relative overflow-hidden px-6 py-24">
-    <div class="absolute inset-0 bg-gradient-to-br from-corix-accent/[0.06] via-transparent to-ctp-blue/[0.04] pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-coren-accent/[0.06] via-transparent to-ctp-blue/[0.04] pointer-events-none"></div>
     <div class="mx-auto max-w-4xl text-center reveal">
       <h2 class="section-title">Supported provider presets</h2>
       <p class="section-subtitle">The current CLI ships built-in presets for local and hosted providers and also allows custom OpenAI-compatible endpoints.</p>
@@ -364,7 +364,7 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
       <div class="mx-auto mt-8 max-w-3xl rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 text-left">
         <p class="mb-2 text-sm font-semibold text-ctp-text">Recommended single-provider setup</p>
         <p class="text-sm leading-relaxed text-ctp-subtext1">
-          Right now `corix-proxi` uses one active provider at a time. If you plan to keep suggest, inline assist, watch, execute, or debug enabled, the safest single-provider choice is `ollama` with `gemma4:latest`.
+          Right now `coren-proxi` uses one active provider at a time. If you plan to keep suggest, inline assist, watch, execute, or debug enabled, the safest single-provider choice is `ollama` with `gemma4:latest`.
         </p>
       </div>
       <div class="mt-10 flex flex-wrap justify-center gap-4">

@@ -7,7 +7,7 @@ const sidebar = [
     title: 'Get Started',
     icon: 'lucide:rocket',
     links: [
-      ['what-is-corix', 'What is corix?'],
+      ['what-is-coren', 'What is coren?'],
       ['components', 'Components'],
       ['requirements', 'Requirements'],
     ],
@@ -16,7 +16,7 @@ const sidebar = [
     title: 'Installation',
     icon: 'lucide:download',
     links: [
-      ['install-corix', 'Install binaries'],
+      ['install-coren', 'Install binaries'],
       ['bootstrap-proxy', 'Bootstrap proxy'],
       ['auth-license', 'Activate beta license'],
       ['run-stack', 'Run the stack'],
@@ -26,7 +26,7 @@ const sidebar = [
     title: 'Configuration',
     icon: 'lucide:settings',
     links: [
-      ['corix-config', 'corix config'],
+      ['coren-config', 'coren config'],
       ['providers', 'Providers'],
     ],
   },
@@ -50,7 +50,7 @@ const sidebar = [
   },
 ];
 
-const corixConfig = [
+const corenConfig = [
   ['copy-on-select', 'true', 'Auto-copy selected text.'],
   ['middle-click-paste', 'true', 'Paste with middle click into the terminal session.'],
   ['ai-panel-height', '18', 'Panel height when docked top or bottom.'],
@@ -73,8 +73,8 @@ const providers = [
 ---
 
 <Layout
-  title="Documentation — corix"
-  description="Installation and runtime notes for corix, corix-proxi, and corixp."
+  title="Documentation — coren"
+  description="Installation and runtime notes for coren, coren-proxi, and corend."
 >
   <div class="min-h-screen flex">
     <aside class="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 overflow-y-auto border-r border-white/[0.06] bg-ctp-base px-5 py-8 lg:flex xl:w-72">
@@ -97,7 +97,7 @@ const providers = [
         </nav>
 
         <div class="mt-8 rounded-lg bg-ctp-surface0/50 px-3 py-3 text-xs text-ctp-overlay0">
-          The docs below describe the binary distribution flow exposed through `https://corix.dev/install.sh`.
+          The docs below describe the binary distribution flow exposed through `https://coren.dev/install.sh`.
         </div>
       </div>
     </aside>
@@ -106,13 +106,13 @@ const providers = [
       <div class="mx-auto max-w-4xl px-6 py-12 pb-32 lg:px-10">
         <section class="mb-20">
           <div class="mb-8 flex items-center gap-3">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
-              <Icon name="lucide:book-open" class="h-4 w-4 text-corix-accent" />
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
+              <Icon name="lucide:book-open" class="h-4 w-4 text-coren-accent" />
             </div>
-            <h1 class="text-3xl font-bold text-ctp-text">corix documentation</h1>
+            <h1 class="text-3xl font-bold text-ctp-text">coren documentation</h1>
           </div>
           <p class="text-lg leading-relaxed text-ctp-subtext1">
-            `corix` is the terminal app. `corix-proxi` is the local HTTP proxy. `corixp` is the operator CLI for the proxy, database, providers, shell integration, memory inspection, and the user service.
+            `coren` is the terminal app. `coren-proxi` is the local HTTP proxy. `corend` is the operator CLI for the proxy, database, providers, shell integration, memory inspection, and the user service.
           </p>
         </section>
 
@@ -120,13 +120,13 @@ const providers = [
 
         <section class="doc-section mb-20">
           <div class="mb-8 flex items-center gap-3">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
-              <Icon name="lucide:rocket" class="h-4 w-4 text-corix-accent" />
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
+              <Icon name="lucide:rocket" class="h-4 w-4 text-coren-accent" />
             </div>
             <h2 class="text-3xl font-bold text-ctp-text">Get Started</h2>
           </div>
 
-          <h3 id="what-is-corix" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">What is corix?</h3>
+          <h3 id="what-is-coren" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">What is coren?</h3>
           <p class="mb-6 leading-relaxed text-ctp-subtext1">
             It is a Go terminal interface that runs a real shell session, renders it inside the app, and can attach an AI panel that talks to the local proxy API.
           </p>
@@ -134,26 +134,26 @@ const providers = [
           <h3 id="components" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Components</h3>
           <div class="grid gap-4 md:grid-cols-3">
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">`corix`</h4>
+              <h4 class="mb-2 font-semibold text-ctp-text">`coren`</h4>
               <p class="text-sm leading-relaxed text-ctp-subtext1">Interactive terminal UI. Supports panel position state, AI modes, inline assist, scrollback, mouse support, and conversation attachment via `--conv-id`.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">`corix-proxi`</h4>
+              <h4 class="mb-2 font-semibold text-ctp-text">`coren-proxi`</h4>
               <p class="text-sm leading-relaxed text-ctp-subtext1">HTTP server for providers, conversations, inline assist, command completion, and shell-session tool interactions. Defaults to `127.0.0.1:4000`.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">`corixp`</h4>
+              <h4 class="mb-2 font-semibold text-ctp-text">`corend`</h4>
               <p class="text-sm leading-relaxed text-ctp-subtext1">CLI for setup and operations: `init`, `provider`, `db`, `shell`, `service`, `memory`, and `inspect`.</p>
             </div>
           </div>
 
           <h3 id="requirements" class="mb-4 mt-10 scroll-mt-24 text-xl font-semibold text-ctp-text">Requirements</h3>
           <ul class="space-y-2 text-ctp-subtext1">
-            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> MongoDB via Docker or Docker Compose for the default local proxy persistence flow.</li>
-            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> `bash` or `zsh` if you want `corixp shell init` to update your rc file.</li>
-            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> At least one provider API key unless you use a custom endpoint without auth.</li>
-            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> Linux is the only supported platform right now.</li>
-            <li class="flex items-start gap-2"><span class="mt-1 text-corix-accent">›</span> macOS support is planned for a later release.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-coren-accent">›</span> MongoDB via Docker or Docker Compose for the default local proxy persistence flow.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-coren-accent">›</span> `bash` or `zsh` if you want `corend shell init` to update your rc file.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-coren-accent">›</span> At least one provider API key unless you use a custom endpoint without auth.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-coren-accent">›</span> Linux is the only supported platform right now.</li>
+            <li class="flex items-start gap-2"><span class="mt-1 text-coren-accent">›</span> macOS support is planned for a later release.</li>
           </ul>
         </section>
 
@@ -161,15 +161,15 @@ const providers = [
 
         <section class="doc-section mb-20">
           <div class="mb-8 flex items-center gap-3">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
-              <Icon name="lucide:download" class="h-4 w-4 text-corix-accent" />
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
+              <Icon name="lucide:download" class="h-4 w-4 text-coren-accent" />
             </div>
             <h2 class="text-3xl font-bold text-ctp-text">Installation</h2>
           </div>
 
-          <h3 id="install-corix" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Install binaries</h3>
+          <h3 id="install-coren" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Install binaries</h3>
           <p class="mb-4 leading-relaxed text-ctp-subtext1">
-            The supported user path is a single binary installer. It downloads one platform bundle, verifies its checksum, installs `corix`, `corix-proxi`, and `corixp`, and creates the `cor` alias.
+            The supported user path is a single binary installer. It downloads one platform bundle, verifies its checksum, installs `coren`, `coren-proxi`, and `corend`, and creates the `cor` alias.
           </p>
           <div class="terminal-window mb-8">
             <div class="terminal-chrome">
@@ -178,15 +178,15 @@ const providers = [
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
               <span class="ml-auto text-xs text-ctp-overlay0">binary install</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">curl -fsSL https://corix.dev/install.sh | sh</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">curl -fsSL https://coren.dev/install.sh | sh</span></code></pre>
           </div>
           <p class="mb-8 leading-relaxed text-ctp-subtext1">
-            To pin a specific release, the installer also accepts `VERSION=v0.x.y`, for example `curl -fsSL https://corix.dev/install.sh | VERSION=v0.3.1 sh`.
+            To pin a specific release, the installer also accepts `VERSION=v0.x.y`, for example `curl -fsSL https://coren.dev/install.sh | VERSION=v0.3.1 sh`.
           </p>
 
           <h3 id="bootstrap-proxy" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Bootstrap proxy</h3>
           <p class="mb-4 leading-relaxed text-ctp-subtext1">
-            `corixp init` is the shortest valid bootstrap path. It prepares the local runtime, starts or wires MongoDB, and guides provider setup. You should not need a manual `.env` for the normal binary install path.
+            `corend init` is the shortest valid bootstrap path. It prepares the local runtime, starts or wires MongoDB, and guides provider setup. You should not need a manual `.env` for the normal binary install path.
           </p>
           <div class="terminal-window mb-8">
             <div class="terminal-chrome">
@@ -195,12 +195,12 @@ const providers = [
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
               <span class="ml-auto text-xs text-ctp-overlay0">bootstrap</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corixp init</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corend init</span></code></pre>
           </div>
 
           <h3 id="auth-license" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Activate beta license</h3>
           <p class="mb-4 leading-relaxed text-ctp-subtext1">
-            The proxy validates beta access through your auth session. After setup, log in once so `corix-proxi` can activate your local beta license.
+            The proxy validates beta access through your auth session. After setup, log in once so `coren-proxi` can activate your local beta license.
           </p>
           <div class="terminal-window mb-8">
             <div class="terminal-chrome">
@@ -209,12 +209,12 @@ const providers = [
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
               <span class="ml-auto text-xs text-ctp-overlay0">auth</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corixp auth login</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corend auth login</span></code></pre>
           </div>
 
           <h3 id="run-stack" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Run the stack</h3>
           <p class="mb-4 leading-relaxed text-ctp-subtext1">
-            The website onboarding should stay simple: start the proxy, then open the TUI with `corix`.
+            The website onboarding should stay simple: start the proxy, then open the TUI with `coren`.
           </p>
           <div class="terminal-window">
             <div class="terminal-chrome">
@@ -223,9 +223,9 @@ const providers = [
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
               <span class="ml-auto text-xs text-ctp-overlay0">run</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corix-proxi</span>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">coren-proxi</span>
 
-<span class="text-ctp-green">corix</span></code></pre>
+<span class="text-ctp-green">coren</span></code></pre>
           </div>
         </section>
 
@@ -233,15 +233,15 @@ const providers = [
 
         <section class="doc-section mb-20">
           <div class="mb-8 flex items-center gap-3">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
-              <Icon name="lucide:settings" class="h-4 w-4 text-corix-accent" />
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
+              <Icon name="lucide:settings" class="h-4 w-4 text-coren-accent" />
             </div>
             <h2 class="text-3xl font-bold text-ctp-text">Configuration</h2>
           </div>
 
-          <h3 id="corix-config" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">corix config</h3>
+          <h3 id="coren-config" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">coren config</h3>
           <p class="mb-4 leading-relaxed text-ctp-subtext1">
-            `corix` reads `~/.config/corix/config` as a simple key-value file. Runtime state such as panel position and current AI mode is stored separately in `~/.config/corix/state`.
+            `coren` reads `~/.config/coren/config` as a simple key-value file. Runtime state such as panel position and current AI mode is stored separately in `~/.config/coren/state`.
           </p>
           <div class="overflow-x-auto mb-10">
             <table class="w-full text-sm">
@@ -253,9 +253,9 @@ const providers = [
                 </tr>
               </thead>
               <tbody class="text-ctp-subtext1">
-                {corixConfig.map(([key, value, desc]) => (
+                {corenConfig.map(([key, value, desc]) => (
                   <tr class="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.02]">
-                    <td class="px-4 py-3"><code class="text-corix-accent">{key}</code></td>
+                    <td class="px-4 py-3"><code class="text-coren-accent">{key}</code></td>
                     <td class="px-4 py-3 text-ctp-overlay0">{value}</td>
                     <td class="px-4 py-3">{desc}</td>
                   </tr>
@@ -269,17 +269,17 @@ const providers = [
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">~/.config/corix/config</span>
+              <span class="ml-auto text-xs text-ctp-overlay0">~/.config/coren/config</span>
             </div>
             <pre class="overflow-x-auto p-4 text-sm font-mono"><code>proxy-url = http://127.0.0.1:4000
-workspace = /home/you/Workspace/oceanstack/corix-website
+workspace = /home/you/Workspace/oceanstack/coren-website
 ai-panel-open = true
 ai-panel-width = 90</code></pre>
           </div>
 
           <h3 id="providers" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Providers</h3>
           <p class="mb-4 leading-relaxed text-ctp-subtext1">
-            `corixp provider add` offers built-in presets and a custom option. The active provider is resolved from MongoDB, not from a flat file.
+            `corend provider add` offers built-in presets and a custom option. The active provider is resolved from MongoDB, not from a flat file.
           </p>
           <div class="card mb-6 p-5">
             <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-yellow">API cost warning</p>
@@ -302,7 +302,7 @@ ai-panel-width = 90</code></pre>
               <tbody class="text-ctp-subtext1">
                 {providers.map(([name, url, model]) => (
                   <tr class="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.02]">
-                    <td class="px-4 py-3"><code class="text-corix-accent">{name}</code></td>
+                    <td class="px-4 py-3"><code class="text-coren-accent">{name}</code></td>
                     <td class="px-4 py-3 text-ctp-overlay0">{url}</td>
                     <td class="px-4 py-3">{model}</td>
                   </tr>
@@ -316,8 +316,8 @@ ai-panel-width = 90</code></pre>
 
         <section class="doc-section mb-20">
           <div class="mb-8 flex items-center gap-3">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
-              <Icon name="lucide:brain" class="h-4 w-4 text-corix-accent" />
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
+              <Icon name="lucide:brain" class="h-4 w-4 text-coren-accent" />
             </div>
             <h2 class="text-3xl font-bold text-ctp-text">Runtime</h2>
           </div>
@@ -368,7 +368,7 @@ ai-panel-width = 90</code></pre>
 
           <h3 id="service" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">User service</h3>
           <p class="mb-4 leading-relaxed text-ctp-subtext1">
-            `corixp service install` writes a user-level systemd unit in `~/.config/systemd/user/corix-proxi.service` and points it at the `corix-proxi` binary.
+            `corend service install` writes a user-level systemd unit in `~/.config/systemd/user/coren-proxi.service` and points it at the `coren-proxi` binary.
           </p>
           <div class="terminal-window">
             <div class="terminal-chrome">
@@ -377,10 +377,10 @@ ai-panel-width = 90</code></pre>
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
               <span class="ml-auto text-xs text-ctp-overlay0">service</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">cd ../corix-proxi</span>
-<span class="text-ctp-green">corixp service install</span>
-<span class="text-ctp-green">corixp service start</span>
-<span class="text-ctp-green">corixp service status</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">cd ../coren-proxi</span>
+<span class="text-ctp-green">corend service install</span>
+<span class="text-ctp-green">corend service start</span>
+<span class="text-ctp-green">corend service status</span></code></pre>
           </div>
         </section>
 
@@ -388,8 +388,8 @@ ai-panel-width = 90</code></pre>
 
         <section class="doc-section">
           <div class="mb-8 flex items-center gap-3">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-corix-accent/10">
-              <Icon name="lucide:wrench" class="h-4 w-4 text-corix-accent" />
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
+              <Icon name="lucide:wrench" class="h-4 w-4 text-coren-accent" />
             </div>
             <h2 class="text-3xl font-bold text-ctp-text">Troubleshooting</h2>
           </div>
@@ -397,7 +397,7 @@ ai-panel-width = 90</code></pre>
           <h3 id="port-mismatch" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Port mismatch</h3>
           <div class="card mb-8 p-5">
             <p class="text-sm leading-relaxed text-ctp-subtext1">
-              If the AI panel cannot reach the proxy, verify that `corix-proxi` is running and that your local config points at the expected proxy URL.
+              If the AI panel cannot reach the proxy, verify that `coren-proxi` is running and that your local config points at the expected proxy URL.
             </p>
           </div>
 
@@ -409,18 +409,18 @@ ai-panel-width = 90</code></pre>
               <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
               <span class="ml-auto text-xs text-ctp-overlay0">db</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">cd ../corix-proxi</span>
-<span class="text-ctp-green">corixp db status</span>
-<span class="text-ctp-green">corixp db logs -f</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">cd ../coren-proxi</span>
+<span class="text-ctp-green">corend db status</span>
+<span class="text-ctp-green">corend db logs -f</span></code></pre>
           </div>
 
           <h3 id="workspace" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Workspace export</h3>
           <div class="card p-5">
             <p class="mb-3 text-sm leading-relaxed text-ctp-subtext1">
-              `corixp shell init zsh --workspace /path/to/repo` or `corixp shell init bash --workspace /path/to/repo` updates your shell rc and writes `export CORIX_WORKSPACE="..."`.
+              `corend shell init zsh --workspace /path/to/repo` or `corend shell init bash --workspace /path/to/repo` updates your shell rc and writes `export COREN_WORKSPACE="..."`.
             </p>
             <p class="text-sm leading-relaxed text-ctp-subtext1">
-              If corix opens in the right directory but AI context looks wrong, confirm that variable or set `workspace = /path/to/repo` in `~/.config/corix/config`.
+              If coren opens in the right directory but AI context looks wrong, confirm that variable or set `workspace = /path/to/repo` in `~/.config/coren/config`.
             </p>
           </div>
         </section>

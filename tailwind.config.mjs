@@ -23,7 +23,7 @@ export default {
           peach: "#fab387",
           red: "#f38ba8",
         },
-        corix: {
+        coren: {
           accent: "#cba6f7",
           dim: "#45475a",
           bg: "#1e1e2e",
