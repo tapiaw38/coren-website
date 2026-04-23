@@ -6,7 +6,7 @@ SERVER_BIN="coren-proxi"
 CLI_BIN="corend"
 ALIAS_BIN="cor"
 
-RELEASES_BASE_URL="${RELEASES_BASE_URL:-https://coren.dev/releases}"
+RELEASES_BASE_URL="${RELEASES_BASE_URL:-https://tapiaw38.github.io/coren-website/releases}"
 VERSION="${VERSION:-latest}"
 INSTALL_DIR="${INSTALL_DIR:-}"
 CHECKSUMS_FILE="SHA256SUMS"
