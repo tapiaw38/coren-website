@@ -292,7 +292,7 @@ ai-panel-width = 90</code></pre>
               Today only one provider can be active at a time. If you want those high-frequency features on, use a single lightweight local setup, for example `ollama` with `gemma4:latest`.
             </p>
           </div>
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto mb-10">
             <table class="w-full text-sm">
               <thead>
                 <tr class="border-b border-white/[0.08]">
@@ -311,6 +311,40 @@ ai-panel-width = 90</code></pre>
                 ))}
               </tbody>
             </table>
+          </div>
+
+          <p class="mb-3 text-sm font-semibold text-tn-text">Using a preset</p>
+          <div class="terminal-window mb-6">
+            <div class="terminal-chrome">
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">preset provider</span>
+            </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-muted"># register and activate a built-in preset</span>
+<span class="text-tn-green">corend provider use deepseek --api-key sk-xxxxxxxxxxxxxxxx</span>
+
+<span class="text-tn-muted"># switch between already-registered providers</span>
+<span class="text-tn-green">corend provider use ollama</span></code></pre>
+          </div>
+
+          <p class="mb-3 text-sm font-semibold text-tn-text">Adding a custom provider</p>
+          <p class="mb-4 text-sm leading-relaxed text-tn-subtext">
+            Any OpenAI-compatible endpoint works. Pass `--base-url` and `--model` to override the defaults, and `--api-key` if the endpoint requires auth.
+          </p>
+          <div class="terminal-window mb-4">
+            <div class="terminal-chrome">
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">custom provider</span>
+            </div>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-muted"># custom OpenAI-compatible endpoint</span>
+<span class="text-tn-green">corend provider use custom \</span>
+<span class="text-tn-green">  --name "my-provider" \</span>
+<span class="text-tn-green">  --base-url https://my-llm-host/v1 \</span>
+<span class="text-tn-green">  --model my-model-name \</span>
+<span class="text-tn-green">  --api-key sk-xxxxxxxxxxxxxxxx</span></code></pre>
           </div>
         </section>
 
