@@ -60,6 +60,7 @@ const corenConfig = [
   ['inline-assist', 'true', 'Enable inline hints after command execution.'],
   ['proxy-url', 'empty', 'Base URL for the proxy, for example `http://127.0.0.1:4000`.'],
   ['workspace', 'empty', 'Workspace path sent to the proxy as context.'],
+  ['theme', 'catppuccin', 'Color theme: `catppuccin`, `dracula`, `rosepine`, or `tokyonight`.'],
 ];
 
 const providers = [
@@ -77,26 +78,26 @@ const providers = [
   description="Installation and runtime notes for coren, coren-proxi, and corend."
 >
   <div class="min-h-screen flex">
-    <aside class="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 overflow-y-auto border-r border-white/[0.06] bg-ctp-base px-5 py-8 lg:flex xl:w-72">
+    <aside class="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 overflow-y-auto border-r border-white/[0.06] bg-tn-bg px-5 py-8 lg:flex xl:w-72">
       <div class="w-full">
-        <p class="mb-4 px-2 text-xs font-bold uppercase tracking-widest text-ctp-overlay0">Documentation</p>
+        <p class="mb-4 px-2 text-xs font-bold uppercase tracking-widest text-tn-muted">Documentation</p>
         <nav class="flex flex-col gap-3">
           {sidebar.map((group) => (
             <div>
-              <p class="mb-1 flex items-center gap-2 px-2 text-sm font-semibold text-ctp-subtext1">
+              <p class="mb-1 flex items-center gap-2 px-2 text-sm font-semibold text-tn-subtext">
                 <Icon name={group.icon} class="h-3.5 w-3.5 opacity-60" />
                 {group.title}
               </p>
               <div class="flex flex-col gap-0.5 pl-5">
                 {group.links.map(([href, label]) => (
-                  <a href={`#${href}`} class="rounded px-2 py-1 text-sm text-ctp-overlay0 transition-colors hover:text-ctp-text">{label}</a>
+                  <a href={`#${href}`} class="rounded px-2 py-1 text-sm text-tn-muted transition-colors hover:text-tn-text">{label}</a>
                 ))}
               </div>
             </div>
           ))}
         </nav>
 
-        <div class="mt-8 rounded-lg bg-ctp-surface0/50 px-3 py-3 text-xs text-ctp-overlay0">
+        <div class="mt-8 rounded-lg bg-tn-storm/50 px-3 py-3 text-xs text-tn-muted">
           The docs below describe the binary distribution flow exposed through `https://coren.dev/install.sh`.
         </div>
       </div>
@@ -109,9 +110,9 @@ const providers = [
             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
               <Icon name="lucide:book-open" class="h-4 w-4 text-coren-accent" />
             </div>
-            <h1 class="text-3xl font-bold text-ctp-text">coren documentation</h1>
+            <h1 class="text-3xl font-bold text-tn-text">coren documentation</h1>
           </div>
-          <p class="text-lg leading-relaxed text-ctp-subtext1">
+          <p class="text-lg leading-relaxed text-tn-subtext">
             `coren` is the terminal app. `coren-proxi` is the local HTTP proxy. `corend` is the operator CLI for the proxy, database, providers, shell integration, memory inspection, and the user service.
           </p>
         </section>
@@ -123,32 +124,32 @@ const providers = [
             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
               <Icon name="lucide:rocket" class="h-4 w-4 text-coren-accent" />
             </div>
-            <h2 class="text-3xl font-bold text-ctp-text">Get Started</h2>
+            <h2 class="text-3xl font-bold text-tn-text">Get Started</h2>
           </div>
 
-          <h3 id="what-is-coren" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">What is coren?</h3>
-          <p class="mb-6 leading-relaxed text-ctp-subtext1">
+          <h3 id="what-is-coren" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">What is coren?</h3>
+          <p class="mb-6 leading-relaxed text-tn-subtext">
             It is a Go terminal interface that runs a real shell session, renders it inside the app, and can attach an AI panel that talks to the local proxy API.
           </p>
 
-          <h3 id="components" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Components</h3>
+          <h3 id="components" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Components</h3>
           <div class="grid gap-4 md:grid-cols-3">
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">`coren`</h4>
-              <p class="text-sm leading-relaxed text-ctp-subtext1">Interactive terminal UI. Supports panel position state, AI modes, inline assist, scrollback, mouse support, and conversation attachment via `--conv-id`.</p>
+              <h4 class="mb-2 font-semibold text-tn-text">`coren`</h4>
+              <p class="text-sm leading-relaxed text-tn-subtext">Interactive terminal UI. Supports panel position state, AI modes, inline assist, scrollback, mouse support, and conversation attachment via `--conv-id`.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">`coren-proxi`</h4>
-              <p class="text-sm leading-relaxed text-ctp-subtext1">HTTP server for providers, conversations, inline assist, command completion, and shell-session tool interactions. Defaults to `127.0.0.1:4000`.</p>
+              <h4 class="mb-2 font-semibold text-tn-text">`coren-proxi`</h4>
+              <p class="text-sm leading-relaxed text-tn-subtext">HTTP server for providers, conversations, inline assist, command completion, and shell-session tool interactions. Defaults to `127.0.0.1:4000`.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">`corend`</h4>
-              <p class="text-sm leading-relaxed text-ctp-subtext1">CLI for setup and operations: `init`, `provider`, `db`, `shell`, `service`, `memory`, and `inspect`.</p>
+              <h4 class="mb-2 font-semibold text-tn-text">`corend`</h4>
+              <p class="text-sm leading-relaxed text-tn-subtext">CLI for setup and operations: `init`, `provider`, `db`, `shell`, `service`, `memory`, and `inspect`.</p>
             </div>
           </div>
 
-          <h3 id="requirements" class="mb-4 mt-10 scroll-mt-24 text-xl font-semibold text-ctp-text">Requirements</h3>
-          <ul class="space-y-2 text-ctp-subtext1">
+          <h3 id="requirements" class="mb-4 mt-10 scroll-mt-24 text-xl font-semibold text-tn-text">Requirements</h3>
+          <ul class="space-y-2 text-tn-subtext">
             <li class="flex items-start gap-2"><span class="mt-1 text-coren-accent">›</span> MongoDB via Docker or Docker Compose for the default local proxy persistence flow.</li>
             <li class="flex items-start gap-2"><span class="mt-1 text-coren-accent">›</span> `bash` or `zsh` if you want `corend shell init` to update your rc file.</li>
             <li class="flex items-start gap-2"><span class="mt-1 text-coren-accent">›</span> At least one provider API key unless you use a custom endpoint without auth.</li>
@@ -164,68 +165,68 @@ const providers = [
             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
               <Icon name="lucide:download" class="h-4 w-4 text-coren-accent" />
             </div>
-            <h2 class="text-3xl font-bold text-ctp-text">Installation</h2>
+            <h2 class="text-3xl font-bold text-tn-text">Installation</h2>
           </div>
 
-          <h3 id="install-coren" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Install binaries</h3>
-          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+          <h3 id="install-coren" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Install binaries</h3>
+          <p class="mb-4 leading-relaxed text-tn-subtext">
             The supported user path is a single binary installer. It downloads one platform bundle, verifies its checksum, installs `coren`, `coren-proxi`, and `corend`, and creates the `cor` alias.
           </p>
           <div class="terminal-window mb-8">
             <div class="terminal-chrome">
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">binary install</span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">binary install</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">curl -fsSL https://coren.dev/install.sh | sh</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-green">curl -fsSL https://coren.dev/install.sh | sh</span></code></pre>
           </div>
-          <p class="mb-8 leading-relaxed text-ctp-subtext1">
+          <p class="mb-8 leading-relaxed text-tn-subtext">
             To pin a specific release, the installer also accepts `VERSION=v0.x.y`, for example `curl -fsSL https://coren.dev/install.sh | VERSION=v0.3.1 sh`.
           </p>
 
-          <h3 id="bootstrap-proxy" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Bootstrap proxy</h3>
-          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+          <h3 id="bootstrap-proxy" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Bootstrap proxy</h3>
+          <p class="mb-4 leading-relaxed text-tn-subtext">
             `corend init` is the shortest valid bootstrap path. It prepares the local runtime, starts or wires MongoDB, and guides provider setup. You should not need a manual `.env` for the normal binary install path.
           </p>
           <div class="terminal-window mb-8">
             <div class="terminal-chrome">
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">bootstrap</span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">bootstrap</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corend init</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-green">corend init</span></code></pre>
           </div>
 
-          <h3 id="auth-license" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Activate beta license</h3>
-          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+          <h3 id="auth-license" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Activate beta license</h3>
+          <p class="mb-4 leading-relaxed text-tn-subtext">
             The proxy validates beta access through your auth session. After setup, log in once so `coren-proxi` can activate your local beta license.
           </p>
           <div class="terminal-window mb-8">
             <div class="terminal-chrome">
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">auth</span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">auth</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">corend auth login</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-green">corend auth login</span></code></pre>
           </div>
 
-          <h3 id="run-stack" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Run the stack</h3>
-          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+          <h3 id="run-stack" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Run the stack</h3>
+          <p class="mb-4 leading-relaxed text-tn-subtext">
             The website onboarding should stay simple: start the proxy, then open the TUI with `coren`.
           </p>
           <div class="terminal-window">
             <div class="terminal-chrome">
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">run</span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">run</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">coren-proxi</span>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-green">coren-proxi</span>
 
-<span class="text-ctp-green">coren</span></code></pre>
+<span class="text-tn-green">coren</span></code></pre>
           </div>
         </section>
 
@@ -236,27 +237,27 @@ const providers = [
             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
               <Icon name="lucide:settings" class="h-4 w-4 text-coren-accent" />
             </div>
-            <h2 class="text-3xl font-bold text-ctp-text">Configuration</h2>
+            <h2 class="text-3xl font-bold text-tn-text">Configuration</h2>
           </div>
 
-          <h3 id="coren-config" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">coren config</h3>
-          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+          <h3 id="coren-config" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">coren config</h3>
+          <p class="mb-4 leading-relaxed text-tn-subtext">
             `coren` reads `~/.config/coren/config` as a simple key-value file. Runtime state such as panel position and current AI mode is stored separately in `~/.config/coren/state`.
           </p>
           <div class="overflow-x-auto mb-10">
             <table class="w-full text-sm">
               <thead>
                 <tr class="border-b border-white/[0.08]">
-                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Key</th>
-                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Default</th>
-                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Meaning</th>
+                  <th class="px-4 py-3 text-left font-semibold text-tn-subtext">Key</th>
+                  <th class="px-4 py-3 text-left font-semibold text-tn-subtext">Default</th>
+                  <th class="px-4 py-3 text-left font-semibold text-tn-subtext">Meaning</th>
                 </tr>
               </thead>
-              <tbody class="text-ctp-subtext1">
+              <tbody class="text-tn-subtext">
                 {corenConfig.map(([key, value, desc]) => (
                   <tr class="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.02]">
                     <td class="px-4 py-3"><code class="text-coren-accent">{key}</code></td>
-                    <td class="px-4 py-3 text-ctp-overlay0">{value}</td>
+                    <td class="px-4 py-3 text-tn-muted">{value}</td>
                     <td class="px-4 py-3">{desc}</td>
                   </tr>
                 ))}
@@ -266,10 +267,10 @@ const providers = [
 
           <div class="terminal-window mb-10">
             <div class="terminal-chrome">
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">~/.config/coren/config</span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">~/.config/coren/config</span>
             </div>
             <pre class="overflow-x-auto p-4 text-sm font-mono"><code>proxy-url = http://127.0.0.1:4000
 workspace = /home/you/Workspace/oceanstack/coren-website
@@ -277,16 +278,16 @@ ai-panel-open = true
 ai-panel-width = 90</code></pre>
           </div>
 
-          <h3 id="providers" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Providers</h3>
-          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+          <h3 id="providers" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Providers</h3>
+          <p class="mb-4 leading-relaxed text-tn-subtext">
             `corend provider add` offers built-in presets and a custom option. The active provider is resolved from MongoDB, not from a flat file.
           </p>
           <div class="card mb-6 p-5">
-            <p class="mb-2 text-xs uppercase tracking-[0.2em] text-ctp-yellow">API cost warning</p>
-            <p class="mb-3 text-sm leading-relaxed text-ctp-subtext1">
+            <p class="mb-2 text-xs uppercase tracking-[0.2em] text-tn-yellow">API cost warning</p>
+            <p class="mb-3 text-sm leading-relaxed text-tn-subtext">
               `ollama` is the safest recommendation when you want `ai-suggest`, inline assist, watch, execute, or debug enabled all the time. Those paths can generate repeated requests, so a paid hosted API can consume credits much faster than expected.
             </p>
-            <p class="text-sm leading-relaxed text-ctp-subtext1">
+            <p class="text-sm leading-relaxed text-tn-subtext">
               Today only one provider can be active at a time. If you want those high-frequency features on, use a single lightweight local setup, for example `ollama` with `gemma4:latest`.
             </p>
           </div>
@@ -294,16 +295,16 @@ ai-panel-width = 90</code></pre>
             <table class="w-full text-sm">
               <thead>
                 <tr class="border-b border-white/[0.08]">
-                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Name</th>
-                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Base URL</th>
-                  <th class="px-4 py-3 text-left font-semibold text-ctp-subtext1">Default model</th>
+                  <th class="px-4 py-3 text-left font-semibold text-tn-subtext">Name</th>
+                  <th class="px-4 py-3 text-left font-semibold text-tn-subtext">Base URL</th>
+                  <th class="px-4 py-3 text-left font-semibold text-tn-subtext">Default model</th>
                 </tr>
               </thead>
-              <tbody class="text-ctp-subtext1">
+              <tbody class="text-tn-subtext">
                 {providers.map(([name, url, model]) => (
                   <tr class="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.02]">
                     <td class="px-4 py-3"><code class="text-coren-accent">{name}</code></td>
-                    <td class="px-4 py-3 text-ctp-overlay0">{url}</td>
+                    <td class="px-4 py-3 text-tn-muted">{url}</td>
                     <td class="px-4 py-3">{model}</td>
                   </tr>
                 ))}
@@ -319,68 +320,68 @@ ai-panel-width = 90</code></pre>
             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
               <Icon name="lucide:brain" class="h-4 w-4 text-coren-accent" />
             </div>
-            <h2 class="text-3xl font-bold text-ctp-text">Runtime</h2>
+            <h2 class="text-3xl font-bold text-tn-text">Runtime</h2>
           </div>
 
-          <h3 id="modes" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">AI modes</h3>
+          <h3 id="modes" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">AI modes</h3>
           <div class="grid gap-4 md:grid-cols-2 mb-10">
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">Default</h4>
-              <p class="text-sm leading-relaxed text-ctp-subtext1">General chat mode inside the panel.</p>
+              <h4 class="mb-2 font-semibold text-tn-text">Default</h4>
+              <p class="text-sm leading-relaxed text-tn-subtext">General chat mode inside the panel.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">Watch</h4>
-              <p class="text-sm leading-relaxed text-ctp-subtext1">Submits command output to the AI after output settles.</p>
+              <h4 class="mb-2 font-semibold text-tn-text">Watch</h4>
+              <p class="text-sm leading-relaxed text-tn-subtext">Submits command output to the AI after output settles.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">Execute</h4>
-              <p class="text-sm leading-relaxed text-ctp-subtext1">Proposes follow-up commands that you can confirm before execution.</p>
+              <h4 class="mb-2 font-semibold text-tn-text">Execute</h4>
+              <p class="text-sm leading-relaxed text-tn-subtext">Proposes follow-up commands that you can confirm before execution.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-ctp-text">Debug</h4>
-              <p class="text-sm leading-relaxed text-ctp-subtext1">Only reacts on outputs that look like a failure path.</p>
+              <h4 class="mb-2 font-semibold text-tn-text">Debug</h4>
+              <p class="text-sm leading-relaxed text-tn-subtext">Only reacts on outputs that look like a failure path.</p>
             </div>
           </div>
 
-          <h3 id="shortcuts" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Keyboard</h3>
+          <h3 id="shortcuts" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Keyboard</h3>
           <div class="shortcut-table mb-10">
             <div class="shortcut-row">
               <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">O</kbd>
-              <span class="text-ctp-subtext1">Toggle the AI panel.</span>
+              <span class="text-tn-subtext">Toggle the AI panel.</span>
             </div>
             <div class="shortcut-row">
               <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">Q</kbd>
-              <span class="text-ctp-subtext1">Quit or move back to the terminal depending on state.</span>
+              <span class="text-tn-subtext">Quit or move back to the terminal depending on state.</span>
             </div>
             <div class="shortcut-row">
               <kbd class="key">Esc</kbd>
-              <span class="text-ctp-subtext1">Return to terminal focus from the AI panel.</span>
+              <span class="text-tn-subtext">Return to terminal focus from the AI panel.</span>
             </div>
             <div class="shortcut-row">
               <kbd class="key">Tab</kbd>
-              <span class="text-ctp-subtext1">Accept inline AI suggestion.</span>
+              <span class="text-tn-subtext">Accept inline AI suggestion.</span>
             </div>
             <div class="shortcut-row">
               <kbd class="key">Alt</kbd><span class="key-sep">+</span><kbd class="key">←</kbd>/<kbd class="key">→</kbd>/<kbd class="key">↑</kbd>/<kbd class="key">↓</kbd>
-              <span class="text-ctp-subtext1">Move the AI panel around the terminal.</span>
+              <span class="text-tn-subtext">Move the AI panel around the terminal.</span>
             </div>
           </div>
 
-          <h3 id="service" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">User service</h3>
-          <p class="mb-4 leading-relaxed text-ctp-subtext1">
+          <h3 id="service" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">User service</h3>
+          <p class="mb-4 leading-relaxed text-tn-subtext">
             `corend service install` writes a user-level systemd unit in `~/.config/systemd/user/coren-proxi.service` and points it at the `coren-proxi` binary.
           </p>
           <div class="terminal-window">
             <div class="terminal-chrome">
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">service</span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">service</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">cd ../coren-proxi</span>
-<span class="text-ctp-green">corend service install</span>
-<span class="text-ctp-green">corend service start</span>
-<span class="text-ctp-green">corend service status</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-green">cd ../coren-proxi</span>
+<span class="text-tn-green">corend service install</span>
+<span class="text-tn-green">corend service start</span>
+<span class="text-tn-green">corend service status</span></code></pre>
           </div>
         </section>
 
@@ -391,35 +392,35 @@ ai-panel-width = 90</code></pre>
             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-coren-accent/10">
               <Icon name="lucide:wrench" class="h-4 w-4 text-coren-accent" />
             </div>
-            <h2 class="text-3xl font-bold text-ctp-text">Troubleshooting</h2>
+            <h2 class="text-3xl font-bold text-tn-text">Troubleshooting</h2>
           </div>
 
-          <h3 id="port-mismatch" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Port mismatch</h3>
+          <h3 id="port-mismatch" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Port mismatch</h3>
           <div class="card mb-8 p-5">
-            <p class="text-sm leading-relaxed text-ctp-subtext1">
+            <p class="text-sm leading-relaxed text-tn-subtext">
               If the AI panel cannot reach the proxy, verify that `coren-proxi` is running and that your local config points at the expected proxy URL.
             </p>
           </div>
 
-          <h3 id="mongo" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">MongoDB</h3>
+          <h3 id="mongo" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">MongoDB</h3>
           <div class="terminal-window mb-8">
             <div class="terminal-chrome">
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-red/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-yellow/80"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ctp-green/80"></span>
-              <span class="ml-auto text-xs text-ctp-overlay0">db</span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-red/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-yellow/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-tn-green/80"></span>
+              <span class="ml-auto text-xs text-tn-muted">db</span>
             </div>
-            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-ctp-green">cd ../coren-proxi</span>
-<span class="text-ctp-green">corend db status</span>
-<span class="text-ctp-green">corend db logs -f</span></code></pre>
+            <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-green">cd ../coren-proxi</span>
+<span class="text-tn-green">corend db status</span>
+<span class="text-tn-green">corend db logs -f</span></code></pre>
           </div>
 
-          <h3 id="workspace" class="mb-4 scroll-mt-24 text-xl font-semibold text-ctp-text">Workspace export</h3>
+          <h3 id="workspace" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Workspace export</h3>
           <div class="card p-5">
-            <p class="mb-3 text-sm leading-relaxed text-ctp-subtext1">
+            <p class="mb-3 text-sm leading-relaxed text-tn-subtext">
               `corend shell init zsh --workspace /path/to/repo` or `corend shell init bash --workspace /path/to/repo` updates your shell rc and writes `export COREN_WORKSPACE="..."`.
             </p>
-            <p class="text-sm leading-relaxed text-ctp-subtext1">
+            <p class="text-sm leading-relaxed text-tn-subtext">
               If coren opens in the right directory but AI context looks wrong, confirm that variable or set `workspace = /path/to/repo` in `~/.config/coren/config`.
             </p>
           </div>

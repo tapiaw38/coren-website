@@ -33,7 +33,7 @@ const socialLinks = [
         <img src="/coral-icon.png" alt="coren" class="h-8 w-8 object-contain" />
         <span class="text-xl font-bold text-coren-accent">coren</span>
       </div>
-      <p class="mb-6 text-sm leading-relaxed text-ctp-subtext1">
+      <p class="mb-6 text-sm leading-relaxed text-tn-subtext">
         A terminal-first workflow with a local proxy, operator CLI, workspace-aware context, and room for private company models.
       </p>
       <div class="flex flex-wrap gap-3">
@@ -49,29 +49,29 @@ const socialLinks = [
     </div>
 
     <div>
-      <p class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-ctp-overlay0">Shortcuts</p>
+      <p class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-tn-muted">Shortcuts</p>
       <div class="flex flex-col gap-3 text-sm">
         {productLinks.map(([href, label]) => (
-          <a href={href} class="text-ctp-subtext1 transition-colors hover:text-ctp-text">{label}</a>
+          <a href={href} class="text-tn-subtext transition-colors hover:text-tn-text">{label}</a>
         ))}
       </div>
     </div>
 
     <div>
-      <p class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-ctp-overlay0">Resources</p>
+      <p class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-tn-muted">Resources</p>
       <div class="mb-6 flex flex-col gap-3 text-sm">
         {resourceLinks.map(([href, label]) => (
-          <a href={href} class="text-ctp-subtext1 transition-colors hover:text-ctp-text">{label}</a>
+          <a href={href} class="text-tn-subtext transition-colors hover:text-tn-text">{label}</a>
         ))}
       </div>
 
-      <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-ctp-overlay0">Social</p>
+      <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-tn-muted">Social</p>
       <div class="flex flex-wrap gap-3">
         {socialLinks.map(([href, icon, label]) => (
           <a
             href={href}
             aria-label={label}
-            class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-ctp-subtext1 transition-all duration-200 hover:border-coren-accent/30 hover:bg-white/[0.06] hover:text-ctp-text"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-tn-subtext transition-all duration-200 hover:border-coren-accent/30 hover:bg-white/[0.06] hover:text-tn-text"
           >
             <Icon name={icon} class="h-4 w-4" />
           </a>
@@ -80,7 +80,7 @@ const socialLinks = [
     </div>
   </div>
 
-  <div class="mx-auto mt-12 flex max-w-6xl flex-col gap-3 border-t border-white/[0.06] pt-6 text-sm text-ctp-overlay0 md:flex-row md:items-center md:justify-between">
+  <div class="mx-auto mt-12 flex max-w-6xl flex-col gap-3 border-t border-white/[0.06] pt-6 text-sm text-tn-muted md:flex-row md:items-center md:justify-between">
     <p>Coren. Terminal UI, local proxy, and premium support path.</p>
     <p>Social links are placeholders for now.</p>
   </div>
