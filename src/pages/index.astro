@@ -457,10 +457,14 @@ const providers = ['ollama', 'deepseek', 'openai', 'anthropic', 'gemini', 'groq'
         ))}
       </div>
       <div class="mx-auto mt-8 max-w-3xl rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 text-left">
-        <p class="mb-2 text-sm font-semibold text-tn-text">Recommended single-provider setup</p>
+        <p class="mb-2 text-sm font-semibold text-tn-text">Recommended provider routing</p>
         <p class="text-sm leading-relaxed text-tn-subtext">
-          Right now `coren-proxi` uses one active provider at a time. If you plan to keep suggest, inline assist, watch, execute, or debug enabled, the safest single-provider choice is `ollama` with `gemma4:latest`.
+          `coren-proxi` can route each AI service to a different provider. A practical setup is `assistant -> deepseek` and `suggestions`, `inline`, or `commit` -> `ollama` with `gemma4:latest`, so high-frequency local flows stay cheap.
         </p>
+        <pre class="mt-4 overflow-x-auto rounded-xl border border-white/[0.08] bg-tn-night/70 p-4 text-xs font-mono"><code><span class="text-tn-green">corend ia-service use assistant deepseek</span>
+<span class="text-tn-green">corend ia-service use suggestions ollama</span>
+<span class="text-tn-green">corend ia-service use inline ollama</span>
+<span class="text-tn-green">corend ia-service use commit ollama</span></code></pre>
       </div>
       <div class="mt-10 flex flex-wrap justify-center gap-4">
         <a href={`${import.meta.env.BASE_URL}docs`} class="btn-primary">
