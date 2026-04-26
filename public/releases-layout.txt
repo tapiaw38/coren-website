@@ -1,18 +1,19 @@
-Release layout for https://coren.dev/releases
+Release layout for GitHub Releases
 
-latest/
+Release tag v0.x.y assets:
   SHA256SUMS
   coren_linux_amd64.tar.gz
   coren_linux_arm64.tar.gz
   coren_darwin_amd64.tar.gz
   coren_darwin_arm64.tar.gz
 
-v0.x.y/
-  SHA256SUMS
-  coren_linux_amd64.tar.gz
-  coren_linux_arm64.tar.gz
-  coren_darwin_amd64.tar.gz
-  coren_darwin_arm64.tar.gz
+Install script URLs:
+  latest:
+    https://github.com/tapiaw38/coren-website/releases/latest/download/coren_linux_amd64.tar.gz
+    https://github.com/tapiaw38/coren-website/releases/latest/download/SHA256SUMS
+  pinned:
+    https://github.com/tapiaw38/coren-website/releases/download/v0.x.y/coren_linux_amd64.tar.gz
+    https://github.com/tapiaw38/coren-website/releases/download/v0.x.y/SHA256SUMS
 
 Each archive should contain exactly:
   coren

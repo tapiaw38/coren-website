@@ -6,7 +6,7 @@ SERVER_BIN="coren-proxi"
 CLI_BIN="corend"
 ALIAS_BIN="cor"
 
-RELEASES_BASE_URL="${RELEASES_BASE_URL:-https://tapiaw38.github.io/coren-website/releases}"
+RELEASES_BASE_URL="${RELEASES_BASE_URL:-https://github.com/tapiaw38/coren-website/releases}"
 VERSION="${VERSION:-latest}"
 INSTALL_DIR="${INSTALL_DIR:-}"
 CHECKSUMS_FILE="SHA256SUMS"
@@ -89,17 +89,17 @@ build_download_url() {
   bundle="coren_${os}_${arch}.tar.gz"
 
   if [ "$VERSION" = "latest" ]; then
-    printf '%s\n' "${RELEASES_BASE_URL}/latest/${bundle}"
+    printf '%s\n' "${RELEASES_BASE_URL}/latest/download/${bundle}"
   else
-    printf '%s\n' "${RELEASES_BASE_URL}/${VERSION}/${bundle}"
+    printf '%s\n' "${RELEASES_BASE_URL}/download/${VERSION}/${bundle}"
   fi
 }
 
 build_checksums_url() {
   if [ "$VERSION" = "latest" ]; then
-    printf '%s\n' "${RELEASES_BASE_URL}/latest/${CHECKSUMS_FILE}"
+    printf '%s\n' "${RELEASES_BASE_URL}/latest/download/${CHECKSUMS_FILE}"
   else
-    printf '%s\n' "${RELEASES_BASE_URL}/${VERSION}/${CHECKSUMS_FILE}"
+    printf '%s\n' "${RELEASES_BASE_URL}/download/${VERSION}/${CHECKSUMS_FILE}"
   fi
 }
 
