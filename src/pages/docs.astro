@@ -407,7 +407,7 @@ cursor-style = underline</code></pre>
 
           <p class="mb-3 text-sm font-semibold text-tn-text">License status</p>
           <p class="mb-4 text-sm leading-relaxed text-tn-subtext">
-            In the AI panel header you will see `plan: free`, `plan: pro`, or `plan: team`. Use `/u status` to print the current effective license state inside the AI panel.
+            In the AI panel header you will see `plan: free`, `plan: pro`, or `plan: team`. Use `/status` to print the current effective license state inside the AI panel.
           </p>
           <div class="terminal-window mb-10">
             <div class="terminal-chrome">
@@ -417,7 +417,7 @@ cursor-style = underline</code></pre>
               <span class="ml-auto text-xs text-tn-muted">license status</span>
             </div>
             <pre class="overflow-x-auto p-4 text-sm font-mono"><code><span class="text-tn-muted"># print the current effective license state in the AI panel</span>
-<span class="text-tn-green">/u status</span></code></pre>
+<span class="text-tn-green">/status</span></code></pre>
           </div>
         </section>
 
@@ -473,120 +473,116 @@ cursor-style = underline</code></pre>
 
           <h3 id="panel-commands" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Panel commands</h3>
           <p class="mb-6 leading-relaxed text-tn-subtext">
-            Type a slash command in the AI input to trigger panel actions without leaving the keyboard. Each namespace opens an interactive overlay as you type. Press <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">P</kbd> to open the command palette and search across all namespaces at once.
+            Type a slash command in the AI input to trigger panel actions without leaving the keyboard. Each command opens an interactive overlay as you type. Press <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">P</kbd> to open the command palette and search across all commands at once.
           </p>
 
           <div class="shortcut-group mb-4">
             <p class="shortcut-group-title flex items-center gap-2">
-              <code class="rounded bg-tn-storm px-1.5 py-0.5 text-coren-accent">/g</code>
+              <code class="rounded bg-tn-storm px-1.5 py-0.5 text-coren-accent">/git-</code>
               git
             </p>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g commit</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-commit</code></div>
               <span class="shortcut-desc">Select files to stage or discard, then let the AI generate commit suggestions and a push follow-up.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g review</code></div>
-              <span class="shortcut-desc">Pick a base and head branch, or pass <code>/g review base..head</code> directly. Use <code>a</code> to analyze all files for risks, regressions, and missing tests.</span>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-review</code></div>
+              <span class="shortcut-desc">Pick a base and head branch, or pass <code>/git-review base..head</code> directly. Use <code>a</code> to analyze all files for risks, regressions, and missing tests.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g branch</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-branch</code></div>
               <span class="shortcut-desc">Ask the AI to suggest a branch name based on staged changes or a description.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g branch delete</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-branch-delete</code></div>
               <span class="shortcut-desc">Pick a local branch from an interactive list and delete it.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g pr</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-pr</code></div>
               <span class="shortcut-desc">Preview a pull request body before creating it. Uses a local PR template if one exists, otherwise generates using the configured <code>language</code> or shell locale.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g sync</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-sync</code></div>
               <span class="shortcut-desc">Fetch and rebase the current branch against its upstream in one step.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g conflicts</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-conflicts</code></div>
               <span class="shortcut-desc">Open the conflict navigator. <code>e</code> to edit, <code>a</code> to explain, <code>o</code> for ours, <code>t</code> for theirs, <code>r</code> to refresh.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g log</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-log</code></div>
               <span class="shortcut-desc">Browse the git log in a scrollable overlay.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g stash</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-stash</code></div>
               <span class="shortcut-desc">List stash entries and apply or drop one from an interactive overlay.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/g diff</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/git-diff</code></div>
               <span class="shortcut-desc">Show a scrollable diff of unstaged or staged changes.</span>
             </div>
           </div>
 
           <div class="shortcut-group mb-4">
             <p class="shortcut-group-title flex items-center gap-2">
-              <code class="rounded bg-tn-storm px-1.5 py-0.5 text-coren-accent">/c</code>
               conversation
             </p>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/c new</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/new</code></div>
               <span class="shortcut-desc">Create a new conversation and clear the panel history.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/c history</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/history</code></div>
               <span class="shortcut-desc">Browse and resume recent conversations from the panel.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/c bookmarks</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/bookmarks</code></div>
               <span class="shortcut-desc">Open saved commands. Use <code>Ctrl+B</code> to bookmark a command from the terminal.</span>
             </div>
           </div>
 
           <div class="shortcut-group mb-4">
             <p class="shortcut-group-title flex items-center gap-2">
-              <code class="rounded bg-tn-storm px-1.5 py-0.5 text-coren-accent">/p</code>
               project memory
             </p>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/p context</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/context</code></div>
               <span class="shortcut-desc">Open a full-panel overlay to scroll the project context file. Press <code>e</code> to edit it in your editor.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/p condense</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/condense</code></div>
               <span class="shortcut-desc">Send the context file to the AI to remove duplicates and compact it, then persist the result to disk.</span>
             </div>
           </div>
 
           <div class="shortcut-group mb-4">
             <p class="shortcut-group-title flex items-center gap-2">
-              <code class="rounded bg-tn-storm px-1.5 py-0.5 text-coren-accent">/t</code>
               terminal
             </p>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/t find</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/find</code></div>
               <span class="shortcut-desc">Fuzzy search through shell history and paste the selected entry into the terminal.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/t sum</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/sum</code></div>
               <span class="shortcut-desc">Summarize the last command output using the AI.</span>
             </div>
           </div>
 
           <div class="shortcut-group mb-10">
             <p class="shortcut-group-title flex items-center gap-2">
-              <code class="rounded bg-tn-storm px-1.5 py-0.5 text-coren-accent">/u</code>
               ui
             </p>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/u mode</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/mode</code></div>
               <span class="shortcut-desc">Switch the active AI mode: default, watch, execute, or debug.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/u panel</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/panel</code></div>
               <span class="shortcut-desc">Move the AI panel: bottom, top, left, or right.</span>
             </div>
             <div class="shortcut-row">
-              <div class="shortcut-keys"><code class="text-coren-accent">/u reload</code></div>
+              <div class="shortcut-keys"><code class="text-coren-accent">/reload</code></div>
               <span class="shortcut-desc">Reload <code>~/.config/coren/config</code> without restarting, including theme changes.</span>
             </div>
           </div>
@@ -601,11 +597,11 @@ cursor-style = underline</code></pre>
               <p class="text-sm leading-relaxed text-tn-subtext">Type <code>remember that ...</code> or <code>recuerda que ...</code> in the AI input. The note is saved to <code>.coren/context.md</code> with automatic deduplication.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-tn-text">/p context</h4>
+              <h4 class="mb-2 font-semibold text-tn-text">/context</h4>
               <p class="text-sm leading-relaxed text-tn-subtext">Open a full-panel overlay to scroll the current context file. Press <code>e</code> to edit it in your editor and <code>Esc</code> to close.</p>
             </div>
             <div class="card p-5">
-              <h4 class="mb-2 font-semibold text-tn-text">/p condense</h4>
+              <h4 class="mb-2 font-semibold text-tn-text">/condense</h4>
               <p class="text-sm leading-relaxed text-tn-subtext">Send the context file to the AI to remove duplicates and compact it, then persist the result back to disk. Also runs automatically when the proxy compacts a long conversation.</p>
             </div>
           </div>
