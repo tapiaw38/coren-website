@@ -244,10 +244,8 @@ const trustPills = [
 
       <div class="grid gap-6 md:grid-cols-3">
         <div class="reveal reveal-delay-1 rounded-xl border border-white/[0.07] bg-white/[0.02] p-6">
-          <div class="mb-4 flex items-center gap-3">
-            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-tn-red/10">
-              <Icon name="lucide:cloud-off" class="h-4 w-4 text-tn-red" />
-            </div>
+          <div class="mb-4">
+            <Icon name="lucide:cloud-off" class="h-5 w-5 text-tn-red" />
           </div>
           <p class="mb-3 text-sm text-tn-comment">
             Cloud AI terminals send your code, prompts, and infra details to external servers on every request.
@@ -259,10 +257,8 @@ const trustPills = [
         </div>
 
         <div class="reveal reveal-delay-2 rounded-xl border border-white/[0.07] bg-white/[0.02] p-6">
-          <div class="mb-4 flex items-center gap-3">
-            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-tn-red/10">
-              <Icon name="lucide:arrow-left-right" class="h-4 w-4 text-tn-red" />
-            </div>
+          <div class="mb-4">
+            <Icon name="lucide:arrow-left-right" class="h-5 w-5 text-tn-red" />
           </div>
           <p class="mb-3 text-sm text-tn-comment">
             Most AI tools break your flow. You copy output, switch to a browser tab, paste it in, copy the answer back.
@@ -274,10 +270,8 @@ const trustPills = [
         </div>
 
         <div class="reveal reveal-delay-3 rounded-xl border border-white/[0.07] bg-white/[0.02] p-6">
-          <div class="mb-4 flex items-center gap-3">
-            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-tn-red/10">
-              <Icon name="lucide:help-circle" class="h-4 w-4 text-tn-red" />
-            </div>
+          <div class="mb-4">
+            <Icon name="lucide:help-circle" class="h-5 w-5 text-tn-red" />
           </div>
           <p class="mb-3 text-sm text-tn-comment">
             AI tools have no idea what project you're in. You re-explain your stack on every session.
@@ -302,7 +296,7 @@ const trustPills = [
       <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {features.map((feature, index) => (
           <div class={`card reveal reveal-delay-${(index % 3) + 1}`}>
-            <div class={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg ${feature.bg}`}>
+            <div class="mb-4">
               <Icon name={feature.icon} class={`h-5 w-5 ${feature.color}`} />
             </div>
             <h3 class="mb-2 font-bold text-tn-text">{feature.title}</h3>
@@ -370,9 +364,7 @@ const trustPills = [
 
       <div class="grid gap-6 md:grid-cols-3">
         <div class="reveal reveal-delay-2 card text-center">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-coren-accent/10">
-            <Icon name="lucide:server" class="h-5 w-5 text-coren-accent" />
-          </div>
+          <Icon name="lucide:server" class="mb-4 h-5 w-5 text-coren-accent mx-auto" />
           <h3 class="mb-2 font-bold text-tn-text">Local proxy</h3>
           <p class="text-sm leading-relaxed text-tn-comment">
             All AI requests pass through a proxy running on your machine. Nothing is forwarded unless you choose a cloud provider.
@@ -380,9 +372,7 @@ const trustPills = [
         </div>
 
         <div class="reveal reveal-delay-3 card text-center">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-coren-accent/10">
-            <Icon name="lucide:database" class="h-5 w-5 text-coren-accent" />
-          </div>
+          <Icon name="lucide:database" class="mb-4 h-5 w-5 text-coren-accent mx-auto" />
           <h3 class="mb-2 font-bold text-tn-text">Local storage</h3>
           <p class="text-sm leading-relaxed text-tn-comment">
             Conversation history and provider config are stored locally. No telemetry, no sync to a remote server.
@@ -390,9 +380,7 @@ const trustPills = [
         </div>
 
         <div class="reveal reveal-delay-4 card text-center">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-coren-accent/10">
-            <Icon name="lucide:wifi-off" class="h-5 w-5 text-coren-accent" />
-          </div>
+          <Icon name="lucide:wifi-off" class="mb-4 h-5 w-5 text-coren-accent mx-auto" />
           <h3 class="mb-2 font-bold text-tn-text">Air-gap ready</h3>
           <p class="text-sm leading-relaxed text-tn-comment">
             Run entirely offline with Ollama. Enterprise teams can deploy with no outbound network access at all.
@@ -460,9 +448,7 @@ const trustPills = [
               { icon: 'lucide:key', text: 'No API key sharing — each developer brings their own credentials.' },
             ].map((item) => (
               <div class="flex items-start gap-3">
-                <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-coren-accent/10">
-                  <Icon name={item.icon} class="h-4 w-4 text-coren-accent" />
-                </div>
+                <Icon name={item.icon} class="mt-0.5 h-4 w-4 shrink-0 text-coren-accent" />
                 <p class="text-sm leading-relaxed text-tn-subtext">{item.text}</p>
               </div>
             ))}
