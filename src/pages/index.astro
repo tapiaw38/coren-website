@@ -15,7 +15,14 @@ const features = [
     color: 'text-tn-yellow',
     bg: 'bg-tn-yellow/10',
     title: 'Terminal-Native',
-    desc: 'Not a sidebar. Not a browser extension. Coren runs inside your terminal session with scroll, mouse support, and a live AI panel that never interrupts your shell.',
+    desc: 'Not a sidebar. Not a browser extension. Coren runs inside your terminal session with scroll, mouse support, command blocks, and a live AI panel that never interrupts your shell.',
+  },
+  {
+    icon: 'lucide:history',
+    color: 'text-tn-green',
+    bg: 'bg-tn-green/10',
+    title: 'Command Blocks',
+    desc: 'Jump between completed commands, highlight the exact output range, copy the block output, or rerun the command without digging through scrollback.',
   },
   {
     icon: 'lucide:folder-search',
@@ -39,11 +46,11 @@ const features = [
     desc: 'Ghost-text completions appear as you type. Press Tab to accept. React to command output instantly. No copy-paste. No context switching.',
   },
   {
-    icon: 'lucide:git-pull-request-arrow',
-    color: 'text-tn-green',
-    bg: 'bg-tn-green/10',
-    title: 'Code Review in the Terminal',
-    desc: 'Review staged diffs file-by-file without leaving your shell. AI flags risky changes, explains context, and helps you resolve conflicts before they hit production.',
+    icon: 'lucide:bot',
+    color: 'text-tn-purple',
+    bg: 'bg-tn-purple/10',
+    title: 'Background Agents',
+    desc: 'Send a running AI task to the background, keep working in the terminal, then reopen the queue to promote, inspect, or cancel agents when needed.',
   },
 ];
 
@@ -128,6 +135,8 @@ const comparisonRows = [
   { feature: 'Code stays on device',         coren: '✓', cloud: '✗' },
   { feature: 'Works with Ollama',            coren: '✓', cloud: '✗' },
   { feature: 'Per-project workspace context',coren: '✓', cloud: '✗' },
+  { feature: 'Command block navigation',     coren: '✓', cloud: 'Limited' },
+  { feature: 'Background AI agents',         coren: '✓', cloud: 'Limited' },
   { feature: 'No vendor lock-in',            coren: '✓', cloud: '✗' },
   { feature: 'Terminal-native shell',        coren: '✓', cloud: '✗' },
   { feature: 'Air-gap compatible',           coren: '✓', cloud: '✗' },
@@ -140,6 +149,8 @@ const trustPills = [
   'Local-first',
   'Ollama compatible',
   'OpenAI-compatible API',
+  'Command blocks',
+  'Background agents',
   'Linux-native',
   'Free core forever',
   '7+ provider presets',
@@ -190,9 +201,12 @@ const trustPills = [
             <span class="ml-auto text-xs text-tn-comment">~/projects/api-service</span>
           </div>
           <div class="border-b border-white/[0.05] bg-tn-storm/60 px-3 py-1.5 text-xs text-tn-comment">
-            <span class="text-coren-accent">●</span> workspace loaded · mode: watch · provider: ollama
+            <span class="text-coren-accent">●</span> workspace loaded · mode: watch · provider: ollama · 2 agents
           </div>
           <div class="space-y-1 p-4 text-sm font-mono">
+            <div class="rounded border border-coren-accent/30 bg-coren-accent/5 px-2 py-1">
+              <span class="text-coren-accent">▸ block #18</span> <span class="text-tn-comment">Ctrl+↑ selected · Enter reruns · Ctrl+C copies output</span>
+            </div>
             <div><span class="text-tn-green">❯</span> <span class="text-tn-text">make deploy</span></div>
             <div class="pl-2 text-tn-comment">building image...</div>
             <div class="pl-2 text-tn-red">Error: connection refused on :5432</div>
@@ -201,7 +215,7 @@ const trustPills = [
           <div class="border-t border-white/[0.08]">
             <div class="flex items-center justify-between border-b border-white/[0.05] px-4 py-2 text-xs">
               <span class="font-bold text-coren-accent">✦ coren</span>
-              <span class="text-tn-comment">local · ollama · gemma4:latest</span>
+              <span class="text-tn-comment">Ctrl+N background · Ctrl+T queue</span>
             </div>
             <div class="space-y-1.5 bg-tn-night/50 p-4 text-xs font-mono">
               <p class="text-tn-subtext">PostgreSQL isn't running. The deploy fails at the DB connection step.</p>

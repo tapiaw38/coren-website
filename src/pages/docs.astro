@@ -471,6 +471,32 @@ cursor-style = underline</code></pre>
             </p>
           </div>
 
+          <div class="grid gap-4 md:grid-cols-2">
+            <div class="card mb-10 p-5">
+              <p class="mb-2 text-xs uppercase tracking-[0.2em] text-coren-accent">Command blocks</p>
+              <p class="mb-3 text-sm leading-relaxed text-tn-subtext">
+                Coren tracks completed shell commands as scrollback blocks. Press <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">↑</kbd> or <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">↓</kbd> outside alternate-screen apps to move between blocks. The selected block is highlighted in the terminal.
+              </p>
+              <ul class="space-y-2 text-sm leading-relaxed text-tn-subtext">
+                <li><span class="text-coren-accent">›</span> <code>Ctrl+C</code> copies selected block output.</li>
+                <li><span class="text-coren-accent">›</span> <code>Enter</code> reruns selected block command.</li>
+                <li><span class="text-coren-accent">›</span> <code>Esc</code> exits block navigation and returns to live output.</li>
+              </ul>
+            </div>
+
+            <div class="card mb-10 p-5">
+              <p class="mb-2 text-xs uppercase tracking-[0.2em] text-coren-accent">Background agents</p>
+              <p class="mb-3 text-sm leading-relaxed text-tn-subtext">
+                A running AI response can keep streaming while you return to the terminal. Press <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">N</kbd> in the AI panel to move the current task into the background.
+              </p>
+              <ul class="space-y-2 text-sm leading-relaxed text-tn-subtext">
+                <li><span class="text-coren-accent">›</span> <code>Ctrl+T</code> opens the background agent queue from any mode.</li>
+                <li><span class="text-coren-accent">›</span> In the queue, use <code>↑</code>/<code>↓</code> to select, <code>Enter</code> to promote, and <code>x</code> to cancel.</li>
+                <li><span class="text-coren-accent">›</span> If a background agent needs approval, promote it to handle the pending request in the foreground.</li>
+              </ul>
+            </div>
+          </div>
+
           <h3 id="panel-commands" class="mb-4 scroll-mt-24 text-xl font-semibold text-tn-text">Panel commands</h3>
           <p class="mb-6 leading-relaxed text-tn-subtext">
             Type a slash command in the AI input to trigger panel actions without leaving the keyboard. Each command opens an interactive overlay as you type. Press <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">P</kbd> to open a floating command palette (works in terminal mode and AI mode) and search across all commands at once.
@@ -647,6 +673,12 @@ cursor-style = underline</code></pre>
             </div>
             <div class="shortcut-row">
               <div class="shortcut-keys">
+                <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">T</kbd>
+              </div>
+              <span class="shortcut-desc">Open or close the background agent queue. Promote, cancel, or inspect running agents without losing terminal state.</span>
+            </div>
+            <div class="shortcut-row">
+              <div class="shortcut-keys">
                 <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">Q</kbd>
               </div>
               <span class="shortcut-desc">Quit or return to the terminal depending on state.</span>
@@ -669,9 +701,37 @@ cursor-style = underline</code></pre>
             </div>
             <div class="shortcut-row">
               <div class="shortcut-keys">
+                <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">N</kbd>
+              </div>
+              <span class="shortcut-desc">Move the current streaming AI task to a background agent and clear the panel for more work.</span>
+            </div>
+            <div class="shortcut-row">
+              <div class="shortcut-keys">
                 <kbd class="key">Tab</kbd>
               </div>
               <span class="shortcut-desc">Accept inline AI suggestion.</span>
+            </div>
+          </div>
+
+          <div class="shortcut-group mb-4">
+            <p class="shortcut-group-title">Command blocks</p>
+            <div class="shortcut-row">
+              <div class="shortcut-keys">
+                <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">↑</kbd><span class="key-sep">/</span><kbd class="key">↓</kbd>
+              </div>
+              <span class="shortcut-desc">Navigate older or newer command blocks in terminal scrollback.</span>
+            </div>
+            <div class="shortcut-row">
+              <div class="shortcut-keys">
+                <kbd class="key">Enter</kbd>
+              </div>
+              <span class="shortcut-desc">Rerun the selected block command.</span>
+            </div>
+            <div class="shortcut-row">
+              <div class="shortcut-keys">
+                <kbd class="key">Ctrl</kbd><span class="key-sep">+</span><kbd class="key">C</kbd>
+              </div>
+              <span class="shortcut-desc">Copy the selected block output while block navigation is active.</span>
             </div>
           </div>
 
