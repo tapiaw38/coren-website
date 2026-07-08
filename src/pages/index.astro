@@ -202,42 +202,12 @@ const trustPills = [
 
       <!-- Terminal demo -->
       <div class="hidden md:block reveal reveal-delay-2">
-        <div class="terminal-window shadow-2xl shadow-black/50">
-          <div class="terminal-chrome">
-            <span class="h-3 w-3 rounded-full bg-tn-red/80"></span>
-            <span class="h-3 w-3 rounded-full bg-tn-yellow/80"></span>
-            <span class="h-3 w-3 rounded-full bg-tn-green/80"></span>
-            <span class="ml-auto text-xs text-tn-comment">~/projects/api-service</span>
-          </div>
-          <div class="border-b border-white/[0.05] bg-tn-storm/60 px-3 py-1.5 text-xs text-tn-comment">
-            <span class="text-coren-accent">●</span> workspace loaded · mode: watch · provider: ollama · workflows: 3
-          </div>
-          <div class="space-y-1 p-4 text-sm font-mono">
-            <div class="rounded border border-coren-accent/30 bg-coren-accent/5 px-2 py-1">
-              <span class="text-coren-accent">▸ block #18</span> <span class="text-tn-comment">Ctrl+↑ selected · Enter reruns · Ctrl+C copies output</span>
-            </div>
-            <div class="rounded border border-tn-cyan/25 bg-tn-cyan/5 px-2 py-1">
-              <span class="text-tn-cyan">/workflows</span> <span class="text-tn-comment">dev-stack · deploy · release-v0.5.0</span>
-            </div>
-            <div><span class="text-tn-green">❯</span> <span class="text-tn-text">make deploy</span></div>
-            <div class="pl-2 text-tn-comment">building image...</div>
-            <div class="pl-2 text-tn-red">Error: connection refused on :5432</div>
-            <div class="pl-2 text-tn-comment">exit code 1</div>
-          </div>
-          <div class="border-t border-white/[0.08]">
-            <div class="flex items-center justify-between border-b border-white/[0.05] px-4 py-2 text-xs">
-              <span class="font-bold text-coren-accent">✦ coren</span>
-              <span class="text-tn-comment">Ctrl+N background · Ctrl+T queue</span>
-            </div>
-            <div class="space-y-1.5 bg-tn-night/50 p-4 text-xs font-mono">
-              <p class="text-tn-subtext">PostgreSQL isn't running. The deploy fails at the DB connection step.</p>
-              <p class="text-tn-subtext mt-2">Try:</p>
-              <p class="pl-2 text-tn-green">sudo systemctl start postgresql</p>
-              <p class="pl-2 text-tn-green">make deploy</p>
-              <p class="mt-2 text-tn-muted text-[10px]">Ctrl+E to run suggestion · Tab to accept inline</p>
-            </div>
-          </div>
-        </div>
+        <img
+          src={`${import.meta.env.BASE_URL}coren-terminal.png`}
+          alt="Coren terminal showing a YAML workflow beside the AI panel"
+          class="w-full rounded-xl border border-white/[0.08] shadow-2xl shadow-black/50"
+          loading="eager"
+        />
       </div>
     </div>
   </section>
