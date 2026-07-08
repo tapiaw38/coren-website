@@ -175,17 +175,17 @@ const trustPills = [
     <div class="absolute top-0 left-1/4 h-[560px] w-[560px] rounded-full bg-coren-accent/[0.07] blur-3xl pointer-events-none"></div>
     <div class="absolute bottom-0 right-1/4 h-[440px] w-[440px] rounded-full bg-tn-cyan/[0.04] blur-3xl pointer-events-none"></div>
 
-    <div class="mx-auto grid max-w-6xl items-center gap-12 py-16 md:grid-cols-2 md:py-28">
-      <div class="reveal">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 py-14 md:grid-cols-[0.9fr_1.1fr] md:py-20">
+      <div class="reveal text-center md:text-left">
         <p class="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-coren-accent">Local-first AI terminal</p>
         <h1 class="mb-6 text-4xl font-bold leading-tight tracking-tight text-tn-text sm:text-5xl md:text-6xl">
           Your code never<br />
           <span class="gradient-text">leaves your machine.</span>
         </h1>
-        <p class="mb-8 max-w-xl text-lg leading-relaxed text-tn-subtext">
+        <p class="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-tn-subtext md:mx-0">
           Coren brings local AI directly into your terminal workflow. Run models on your machine, keep context per project, and ship faster — without sending a single line to the cloud.
         </p>
-        <div class="flex flex-wrap gap-4">
+        <div class="flex flex-wrap justify-center gap-4 md:justify-start">
           <a href="#install" class="btn-primary">
             <Icon name="lucide:download" class="h-4 w-4" />
             Install Coren — it's free
@@ -201,11 +201,11 @@ const trustPills = [
       </div>
 
       <!-- Terminal demo -->
-      <div class="hidden md:block reveal reveal-delay-2">
+      <div class="w-full reveal reveal-delay-2">
         <img
           src={`${import.meta.env.BASE_URL}coren-terminal.png`}
           alt="Coren terminal showing a YAML workflow beside the AI panel"
-          class="w-full rounded-xl border border-white/[0.08] shadow-2xl shadow-black/50"
+          class="mx-auto h-auto max-h-[430px] w-auto max-w-full rounded-xl shadow-2xl shadow-black/50 md:mx-0"
           loading="eager"
         />
       </div>
